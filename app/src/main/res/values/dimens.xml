@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- font sizes -->
+    <dimen name="font_xxxlarge">24sp</dimen>
+    <dimen name="font_xxlarge">20sp</dimen>
+    <dimen name="font_xlarge">18sp</dimen>
+    <dimen name="font_large">16sp</dimen>
+    <dimen name="font_normal">14sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_xsmall">10sp</dimen>
+
+
+    <!-- typical spacing between two views -->
+    <dimen name="spacing_xlarge">40dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_medium">20dp</dimen>
+    <dimen name="spacing_normal">14dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_xsmall">8dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_very_tiny">2dp</dimen>
+
+    <!--standard height of layout-->
+    <dimen name="lay_height_xlarge">55dp</dimen>
+    <dimen name="lay_height_large">50dp</dimen>
+    <dimen name="lay_height_medium">45dp</dimen>
+    <dimen name="lay_height_normal">40dp</dimen>
+    <dimen name="lay_height_small">20dp</dimen>
+
+
+    <!--Standard margin-->
+    <dimen name="pad_3dp">3dp</dimen>
+    <dimen name="pad_5dp">5.0dp</dimen>
+    <dimen name="pad_10dp">10.0dp</dimen>
+    <dimen name="pad_15dp">15dp</dimen>
+    <dimen name="pad_24dp">24dp</dimen>
+    <dimen name="pad_30dp">30dp</dimen>
+    <dimen name="pad_38dp">38dp</dimen>
+    <dimen name="pad_48dp">48dp</dimen>
+    <dimen name="pad_60dp">60dp</dimen>
+    <dimen name="pad_70dp">70dp</dimen>
+    <dimen name="pad_80dp">80dp</dimen>
+
+</resources>

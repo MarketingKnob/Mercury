@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Mercury</string>
+
+    <!-- Network error messages -->
+    <string name="error_unexpected_error">Something went wrong. Please try again later</string>
+    <string name="error_bad_connection_try_again">Bad connectivity, please try again</string>
+    <string name="error_remote_server_failed">Application server could not respond. Please try later</string>
+    <string name="error_paring">Parsing error</string>
+    <string name="error_internet_not_connected">Please check your internet connection or try again later.</string>
+    <string name="error_device_rooted">This device is rooted. We are not responsible for any kind of data loss and hack. Use it at your own risk!!</string>
+    <string name="error_fb_login_failed">Facebook Login failed!!</string>
+    <string name="error_session_expired">Session expired.</string>
+
+
+    <string name="login_online">Verifying credentials...</string>
+    <string name="login_offline">Your device needs to be online in order to login. Please check your connection settings.</string>
+
+    <!-- Dialog -->
+    <string name="text_retry">Retry</string>
+    <string name="text_exit">Exit</string>
+    <string name="text_ok">Ok</string>
+    <string name="text_proceed">Proceed</string>
+    <string name="text_loading">Loading…</string>
+    <string name="text_update">Update</string>
+
+
+    <!--Login Screen-->
+
+    <string name="mobile">Enter your registered number <sup>*</sup></string>
+    <string name="name"> Username <sup>*</sup></string>
+    <string name="login"> Login Securely</string>
+    <string name="already_acc">Create a new account </string>
+    <string name="error_wrong_number">You have entered a wrong mobile number.</string>
+
+    <!--SignIn Screen-->
+
+    <string name="hint_email">Email (optional)</string>
+    <string name="btn_sign_up">Create a New Account</string>
+    <string name="login_mercury">Login to Mercury</string>
+    <string name="err_msg_email">You have entered a invalid email address.</string>
+    <string name="err_msg_username">Please enter your username.</string>
+    <string name="otp"> Enter OTP</string>
+    <string name="confim">Confirm</string>
+    <string name="error_wrong_otp">You have entered a wrong OTP.</string>
+    <string name="otp_message">A One Time Password (OTP) has been sent to your mobile number.</string>
+
+
+    <!--API key for Testing-->
+    <string name="api_key">AIzaSyAmYWHUfPiGbB6Ph3Yas3JMkF1e99BJn6Q</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
