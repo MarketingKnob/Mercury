@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp;
+package com.marketingknob.mercury;
 
 import org.junit.Test;
 

@@ -28,13 +28,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.input_username)      AppCompatEditText etusername;
     @BindView(R.id.input_email)         AppCompatEditText etEmail;
     @BindView(R.id.tv_login)            AppCompatTextView tvlogin;
+    @BindView(R.id.tv_number)           AppCompatTextView tvNumber;
 
     @BindView(R.id.input_layout_phone)  TextInputLayout inputLayoutPhone;
     @BindView(R.id.input_layout_name)   TextInputLayout inputLayoutName;
     @BindView(R.id.input_layout_email)  TextInputLayout inputLayoutEmail;
 
-    @BindView(R.id.ll_main) LinearLayoutCompat llMain;
-    @BindView(R.id.ll_otp) LinearLayoutCompat llOtp;
+    @BindView(R.id.ll_main)             LinearLayoutCompat llMain;
+    @BindView(R.id.ll_otp)              LinearLayoutCompat llOtp;
 
     public String strEmail ="", strUsername ="", strPhone ="";
 
@@ -53,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             submitForm();
         }else if (v==tvlogin){
             finish();
-            Animatoo.animateSlideLeft(SignUpActivity.this);
+            Animatoo.animateInAndOut(SignUpActivity.this);
         }else if (v==llMain){
             CommonUtil.hideKeyboard(SignUpActivity.this);
         }else if (v==llOtp){
@@ -95,6 +96,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         llMain.setVisibility(View.GONE);
+        tvNumber.setText(strPhone);
         llOtp.setVisibility(View.VISIBLE);
 
 //        CommonUtil.hideKeyboard(SignUpActivity.this);
@@ -106,7 +108,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * Phone Number Validation
      */
-
     private boolean validatePhone() {
         strPhone = etPhone.getText().toString().trim();
 

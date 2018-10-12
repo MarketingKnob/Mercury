@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp;
+package com.marketingknob.mercury;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
