@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.util;
+package com.marketingknob.mercury.util;
 
 import android.app.Activity;
 import android.content.Context;

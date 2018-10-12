@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.util;
+package com.marketingknob.mercury.util;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -7,7 +7,8 @@ import android.content.DialogInterface;
 import android.view.Window;
 import android.widget.DatePicker;
 
-import com.marketingknob.clubapp.R;
+
+import com.marketingknob.mercury.R;
 
 import static android.app.DatePickerDialog.OnDateSetListener;
 

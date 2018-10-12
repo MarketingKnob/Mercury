@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.util;
+package com.marketingknob.mercury.util;
 
 import android.app.AlertDialog;
 import android.content.Context;

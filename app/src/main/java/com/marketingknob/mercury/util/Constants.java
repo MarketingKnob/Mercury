@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.util;
+package com.marketingknob.mercury.util;
 
 /**
  * Created by Akshya on 5/10/2018.

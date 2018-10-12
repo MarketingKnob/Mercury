@@ -1,9 +1,9 @@
-package com.marketingknob.clubapp.util;
+package com.marketingknob.mercury.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 
-import com.marketingknob.clubapp.R;
+import com.marketingknob.mercury.R;
 
 /**
  * Created by Akshya on 5/10/2018.

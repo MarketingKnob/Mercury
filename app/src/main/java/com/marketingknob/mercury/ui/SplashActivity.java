@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.ui;
+package com.marketingknob.mercury.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,13 +14,11 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.appolica.flubber.Flubber;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
-import com.marketingknob.clubapp.R;
-import com.marketingknob.clubapp.util.RootUtil;
+import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.util.RootUtil;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

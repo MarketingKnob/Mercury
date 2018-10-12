@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.ui;
+package com.marketingknob.mercury.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,15 +11,14 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
-import com.marketingknob.clubapp.R;
-import com.marketingknob.clubapp.util.CommonUtil;
-import com.marketingknob.clubapp.util.DialogUtil;
+import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.util.CommonUtil;
+import com.marketingknob.mercury.util.DialogUtil;
 import com.rilixtech.CountryCodePicker;
 
 import butterknife.BindView;

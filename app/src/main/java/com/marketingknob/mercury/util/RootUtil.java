@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.util;
+package com.marketingknob.mercury.util;
 
 import java.io.BufferedReader;
 import java.io.File;

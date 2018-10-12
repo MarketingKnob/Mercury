@@ -1,6 +1,5 @@
-package com.marketingknob.clubapp.ui;
+package com.marketingknob.mercury.ui;
 
-import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +10,9 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
-import com.marketingknob.clubapp.R;
-import com.marketingknob.clubapp.util.CommonUtil;
-import com.marketingknob.clubapp.util.DialogUtil;
+import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.util.CommonUtil;
+import com.marketingknob.mercury.util.DialogUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

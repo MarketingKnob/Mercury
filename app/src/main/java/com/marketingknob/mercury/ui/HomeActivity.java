@@ -1,4 +1,4 @@
-package com.marketingknob.clubapp.ui;
+package com.marketingknob.mercury.ui;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -8,16 +8,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.marketingknob.clubapp.R;
-import com.marketingknob.clubapp.ui.fragments.FirstFragment;
-import com.marketingknob.clubapp.ui.fragments.HomeFragment;
-import com.marketingknob.clubapp.ui.fragments.SecondFragment;
-import com.marketingknob.clubapp.ui.fragments.ThirdFragment;
+import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.ui.fragments.FirstFragment;
+import com.marketingknob.mercury.ui.fragments.HomeFragment;
+import com.marketingknob.mercury.ui.fragments.SecondFragment;
+import com.marketingknob.mercury.ui.fragments.ThirdFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

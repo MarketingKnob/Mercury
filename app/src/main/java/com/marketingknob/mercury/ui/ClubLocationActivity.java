@@ -1,7 +1,6 @@
-package com.marketingknob.clubapp.ui;
+package com.marketingknob.mercury.ui;
 
 import android.Manifest;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -19,14 +18,12 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
-import com.marketingknob.clubapp.R;
-import com.marketingknob.clubapp.util.GPSTracker;
+import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.util.GPSTracker;
 
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
