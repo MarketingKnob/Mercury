@@ -40,6 +40,7 @@
     <string name="err_msg_email">You have entered a invalid email address.</string>
     <string name="err_msg_username">Please enter your username.</string>
     <string name="otp"> Enter OTP</string>
+    <string name="verfication_code"> Verification Code</string>
     <string name="confim">Confirm</string>
     <string name="error_wrong_otp">You have entered a wrong OTP.</string>
     <string name="otp_message">A One Time Password (OTP) has been sent to your mobile number.</string>

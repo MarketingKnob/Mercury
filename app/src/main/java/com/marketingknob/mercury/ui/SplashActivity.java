@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,11 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.appolica.flubber.Flubber;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.marketingknob.mercury.BuildConfig;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.util.RootUtil;
 
@@ -31,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
 
     AppCompatImageView ivSplashLogo;
     private static int SPLASH_TIME_OUT = 3000;
-
+    private static final int REQ_CODE_PLAY_STORE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +140,20 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
+    }
+
+    /**
+     * Open play store.
+     */
+    private void openPlayStoreForAppUpdate() {
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID));
+        try {
+            startActivityForResult(intent, REQ_CODE_PLAY_STORE);
+        } catch (final Exception e) {
+            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID));
+            startActivityForResult(intent, REQ_CODE_PLAY_STORE);
+        }
     }
 
 }

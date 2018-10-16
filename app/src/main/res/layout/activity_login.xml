@@ -51,7 +51,8 @@
                     app:ccp_setCountryByTimeZone="true"
                     app:ccp_showFullName="false"
                     app:ccp_textColor="@color/main_color"
-                    app:ccp_textSize="@dimen/font_normal" />
+                    app:ccp_textSize="@dimen/font_normal"
+                    app:ccp_defaultNameCode="in"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/input_layout_phone"

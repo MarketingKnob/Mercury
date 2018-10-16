@@ -1,5 +1,6 @@
 package com.marketingknob.mercury.ui;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,12 +8,16 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.goodiebag.pinview.Pinview;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
+import com.rilixtech.CountryCodePicker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,8 +41,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @BindView(R.id.ll_main)             LinearLayoutCompat llMain;
     @BindView(R.id.ll_otp)              LinearLayoutCompat llOtp;
+    @BindView(R.id.btn_otp)             AppCompatButton btnOtp;
+    @BindView(R.id.ccp)                 CountryCodePicker countryCodePicker;
+    @BindView(R.id.pinview)             Pinview pinview;
 
     public String strEmail ="", strUsername ="", strPhone ="";
+
+    private static final String TAG = "SignUpActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         init();
 
+        pinview.setPinViewEventListener(new Pinview.PinViewEventListener() {
+            @Override
+            public void onDataEntered(Pinview pinview, boolean b) {
+                Toast.makeText(SignUpActivity.this, pinview.getValue(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -59,6 +75,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             CommonUtil.hideKeyboard(SignUpActivity.this);
         }else if (v==llOtp){
             CommonUtil.hideKeyboard(SignUpActivity.this);
+        }else if(v==btnOtp){
+            CommonUtil.hideKeyboard(SignUpActivity.this);
+
+            Animatoo.animateInAndOut(SignUpActivity.this);
+            startActivity(new Intent(SignUpActivity.this,ClubLocationActivity.class));
+            finish();
+
         }
     }
 
@@ -68,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     void init(){
 
         ButterKnife.bind(this);
+        countryCodePicker.enableSetCountryByTimeZone(true);
         llMain.setVisibility(View.VISIBLE);
         llOtp.setVisibility(View.GONE);
 
@@ -75,6 +99,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         tvlogin.setOnClickListener(this);
         llMain.setOnClickListener(this);
         llOtp.setOnClickListener(this);
+        btnOtp.setOnClickListener(this);
+
+        pinview.setValue("5846");
     }
 
     /**
@@ -98,11 +125,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         llMain.setVisibility(View.GONE);
         tvNumber.setText(strPhone);
         llOtp.setVisibility(View.VISIBLE);
-
-//        CommonUtil.hideKeyboard(SignUpActivity.this);
-//        startActivity(new Intent(this, ClubLocationActivity.class));
-//        finish();
-//        Animatoo.animateInAndOut(SignUpActivity.this);
     }
 
     /**
@@ -147,7 +169,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return true;
         } else {
             if (!CommonUtil.isValidEmail(strEmail)) {
-                DialogUtil.showDialogMsg(SignUpActivity.this, "Email Error", getResources().getString(R.string.err_msg_email));
+                DialogUtil.showDialogMsg(SignUpActivity.this, "Email Error",
+                        getResources().getString(R.string.err_msg_email));
                 return false;
             } else {
                 inputLayoutEmail.setErrorEnabled(false);
@@ -156,7 +179,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         return true;
     }
-
 
     @Override
     public void onBackPressed() {

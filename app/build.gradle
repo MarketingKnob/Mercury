@@ -62,4 +62,18 @@ dependencies {
 
     //CountryCodePicker Library
     implementation 'com.github.joielechong:countrycodepicker:2.1.8'
+
+    //OTP PinView
+    implementation 'com.github.GoodieBag:Pinview:v1.3'
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.moshi:moshi:1.4.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
 }
