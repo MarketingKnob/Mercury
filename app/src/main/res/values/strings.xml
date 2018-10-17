@@ -42,6 +42,7 @@
     <string name="otp"> Enter OTP</string>
     <string name="verfication_code"> Verification Code</string>
     <string name="confim">Confirm</string>
+    <string name="resend">Resend OTP</string>
     <string name="error_wrong_otp">You have entered a wrong OTP.</string>
     <string name="otp_message">A One Time Password (OTP) has been sent to your mobile number.</string>
 

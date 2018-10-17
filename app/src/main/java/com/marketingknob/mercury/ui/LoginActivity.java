@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvCreateNew.setOnClickListener(this);
         ccp.setClickable(false);
 //        etPhone.addTextChangedListener(new MyTextWatcher(etPhone));
+        CommonUtil.hideKeyboard(LoginActivity.this);
 
     }
 
@@ -78,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.tv_create_new:
+                CommonUtil.hideKeyboard(LoginActivity.this);
                 startActivity(new Intent(this, SignUpActivity.class));
                 Animatoo.animateInAndOut(LoginActivity.this);
                 break;
