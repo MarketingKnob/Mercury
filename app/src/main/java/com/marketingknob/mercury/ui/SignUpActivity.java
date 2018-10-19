@@ -1,5 +1,7 @@
 package com.marketingknob.mercury.ui;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,26 +10,43 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.goodiebag.pinview.Pinview;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.otp.SmsListener;
+import com.marketingknob.mercury.otp.SmsReceiver;
 import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
+import com.marketingknob.mercury.util.ProgressDialogUtil;
+import com.marketingknob.mercury.util.SnackBarUtil;
+import com.marketingknob.mercury.webservices.ApiHelper;
+import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
+import com.marketingknob.mercury.webservices.model.OtpResponse;
+import com.marketingknob.mercury.webservices.model.SignupResponse;
 import com.rilixtech.CountryCodePicker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Response;
+
 import android.os.CountDownTimer;
+import android.widget.Toast;
+
+import java.util.List;
 
 /**
  * Created by Akshya on 8/10/2018.
  */
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener , ApiResponseHelper {
 
     @BindView(R.id.btn_login_in)        AppCompatButton btnSignUp;
     @BindView(R.id.input_phone)         AppCompatEditText etPhone;
@@ -42,15 +61,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.input_layout_email)  TextInputLayout inputLayoutEmail;
 
     @BindView(R.id.ll_main)             LinearLayoutCompat llMain;
+    @BindView(R.id.ll_top)              LinearLayoutCompat llTop;
     @BindView(R.id.ll_otp)              LinearLayoutCompat llOtp;
     @BindView(R.id.btn_otp)             AppCompatButton btnOtp;
     @BindView(R.id.btn_resend_otp)      AppCompatButton btnResendOtp;
     @BindView(R.id.ccp)                 CountryCodePicker countryCodePicker;
     @BindView(R.id.pinview)             Pinview pinview;
 
-    public String strEmail ="", strUsername ="", strPhone ="";
+    public String strEmail ="", strUsername ="", strPhone ="", strDeviceId ="",strOtp="";
     public int counter;
     private static final String TAG = "SignUpActivity";
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +84,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         pinview.setPinViewEventListener(new Pinview.PinViewEventListener() {
             @Override
             public void onDataEntered(Pinview pinview, boolean b) {
-                Toast.makeText(SignUpActivity.this, pinview.getValue(), Toast.LENGTH_SHORT).show();
+
+                strOtp=pinview.getValue();
+            }
+        });
+
+        SmsReceiver.bindListener(new SmsListener() {
+            @Override
+            public void messageReceived(String messageText) {
+                String otp =messageText.replaceAll("\\D+","");
+                strOtp=otp;
+                Log.d(TAG, "messageReceived:"+strOtp+" In integer"+Integer.valueOf(strOtp.trim()));
+                pinview.setValue(otp);
             }
         });
     }
@@ -81,11 +113,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }else if (v==llOtp){
             CommonUtil.hideKeyboard(SignUpActivity.this);
         }else if(v==btnOtp){
-            CommonUtil.hideKeyboard(SignUpActivity.this);
-            Animatoo.animateInAndOut(SignUpActivity.this);
-            startActivity(new Intent(SignUpActivity.this,ClubLocationActivity.class));
-            finish();
-
+            strOtp=pinview.getValue();
+            Log.d(TAG, "onClick:PinGet "+strOtp);
+            otpValidation();
         }
         else if (v==btnResendOtp){
             llMain.setVisibility(View.VISIBLE);
@@ -111,7 +141,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         llOtp.setOnClickListener(this);
         btnOtp.setOnClickListener(this);
         btnResendOtp.setOnClickListener(this);
-        pinview.setValue("5846");
+//        pinview.setValue("5846");
 
         //For Focus of Cursor into Edit Text
         etPhone.requestFocusFromTouch();
@@ -119,9 +149,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
-     * Validating form
+     * Validating Registration Form
      */
-
     private void submitForm() {
 
         CommonUtil.hideKeyboard(SignUpActivity.this);
@@ -135,26 +164,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (!validateEmail()) {
             return;
         }
+        askPermission();
+    }
 
-        llMain.setVisibility(View.GONE);
-        tvNumber.setText(strPhone);
-        llOtp.setVisibility(View.VISIBLE);
-        btnOtp.setVisibility(View.VISIBLE);
-        btnResendOtp.setVisibility(View.GONE);
+    /**
+     * OTP Validation
+     */
+    private void otpValidation() {
+        Log.d(TAG, "otpValidation: "+strOtp);
 
-        new CountDownTimer(30000, 1000) {
+        if (!strOtp.equalsIgnoreCase("")) {
+            pd = ProgressDialogUtil.getProgressDialogMsg(SignUpActivity.this, getResources().getString(R.string.otp_verify));
+            pd.show();
+            new ApiHelper().verifyOtp(strOtp,SignUpActivity.this);
 
-            public void onTick(long millisUntilFinished) {
-                tvTimer.setText("Get OTP within: " + millisUntilFinished / 1000+" Seconds");
-            }
+        } else {
+            DialogUtil.showDialogMsg(SignUpActivity.this, "Blank OTP", getResources().getString(R.string.blank_otp));
 
-            public void onFinish() {
-                tvTimer.setText("Resend OTP!");
-                btnOtp.setVisibility(View.GONE);
-                btnResendOtp.setVisibility(View.VISIBLE);
-            }
-        }.start();
-
+        }
     }
 
     /**
@@ -210,6 +237,57 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return true;
     }
 
+    /**
+     * Ask For Runtime Permission by user
+     */
+    void askPermission(){
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                pd = ProgressDialogUtil.getProgressDialogMsg(SignUpActivity.this, getResources().getString(R.string.create_account));
+                pd.show();
+                new ApiHelper().signUpUser(strUsername,strPhone,strDeviceId,strEmail,SignUpActivity.this);
+
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                DialogUtil.showDialogMsg(SignUpActivity.this, " OTP permission",
+                        getResources().getString(R.string.otp_permission));
+
+            }
+        };
+
+        TedPermission.with(this)
+                .setPermissionListener(permissionlistener)
+//                .setRationaleTitle("Runtime permission")
+//                .setRationaleMessage("If u use the services of app you need to Confirm Runtime Permission")
+                .setDeniedTitle("Permission denied")
+                .setDeniedMessage(
+                        "If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setGotoSettingButtonText("Go to setting")
+                .setPermissions(Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS)
+                .check();
+    }
+
+    /**
+     * OTP timer start
+     */
+
+    private void otpTimerStart(){
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                tvTimer.setText("Get OTP within: " + millisUntilFinished / 1000+" Seconds");
+            }
+            public void onFinish() {
+                tvTimer.setText("Resend OTP!");
+                btnOtp.setVisibility(View.GONE);
+                btnResendOtp.setVisibility(View.VISIBLE);
+            }
+        }.start();
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -217,4 +295,75 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         CommonUtil.hideKeyboard(SignUpActivity.this);
         Animatoo.animateSlideLeft(SignUpActivity.this);
     }
+
+    @Override
+    protected void onDestroy() {
+        SmsReceiver.unbindListener();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSuccess(Response<JsonElement> response, String typeApi) {
+        dismissDialog();
+        if(typeApi.equalsIgnoreCase("signup")) {
+            SignupResponse signupResponse = new Gson().fromJson(response.body(), SignupResponse.class);
+            if(signupResponse != null) {
+                if (!signupResponse.getError()) {
+                    SnackBarUtil.showSnackBar(SignUpActivity.this,signupResponse.getMessage(),llTop);
+                    llMain.setVisibility(View.GONE);
+                    tvNumber.setText(strPhone);
+                    llOtp.setVisibility(View.VISIBLE);
+                    btnOtp.setVisibility(View.VISIBLE);
+                    btnResendOtp.setVisibility(View.GONE);
+                    otpTimerStart();
+
+                } else {
+                    DialogUtil.showDialogMsg(SignUpActivity.this, "Error", signupResponse.getMessage());
+                }
+            } else {
+                DialogUtil.showDialogMsg(SignUpActivity.this, "Error", getResources().getString(R.string.error_try_again));
+            }
+        }
+
+       else if(typeApi.equalsIgnoreCase("verifyOTP")) {
+            OtpResponse otpResponse = new Gson().fromJson(response.body(), OtpResponse.class);
+            if(otpResponse != null) {
+                if (!otpResponse.getError()) {
+                    SnackBarUtil.showSnackBar(SignUpActivity.this,otpResponse.getMessage(),llTop);
+
+                    Log.d(TAG, "onSuccess: Phone"+otpResponse.getUser().getPhone()+" Name"+otpResponse.getUser().getName()
+                    +" Email"+otpResponse.getUser().getEmail());
+
+                    CommonUtil.hideKeyboard(SignUpActivity.this);
+                    Animatoo.animateInAndOut(SignUpActivity.this);
+                    startActivity(new Intent(SignUpActivity.this, ClubLocationActivity.class));
+                    finish();
+
+                } else {
+                    DialogUtil.showDialogMsg(SignUpActivity.this, "Error", otpResponse.getMessage());
+                }
+            } else {
+                DialogUtil.showDialogMsg(SignUpActivity.this, "Error", getResources().getString(R.string.error_try_again));
+            }
+        }
+
+    }
+
+    @Override
+    public void onFailure(String error) {
+        dismissDialog();
+        DialogUtil.showDialogMsg(SignUpActivity.this, "Server Error", getResources().getString(R.string.server_error_try_again));
+    }
+
+    private void dismissDialog() {
+        try {
+            if (pd != null) {
+                if (pd.isShowing())
+                    pd.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

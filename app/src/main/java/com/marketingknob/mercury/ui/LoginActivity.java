@@ -71,7 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_login_in:
                 if (!CommonUtil.isNetworkAvailable(this)) {
-                    DialogUtil.showDialogMsg(LoginActivity.this, "Internet Error", getResources().getString(R.string.login_offline));
+                    DialogUtil.showDialogMsg(LoginActivity.this,
+                            "Internet Error", getResources().getString(R.string.login_offline));
 
                 } else {
                     submitForm();

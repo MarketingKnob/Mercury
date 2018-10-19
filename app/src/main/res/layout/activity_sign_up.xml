@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/main_color_light"
     android:orientation="vertical"
+    android:id="@+id/ll_top"
     tools:context="com.marketingknob.mercury.ui.LoginActivity">
 
     <ScrollView
@@ -225,7 +226,7 @@
                     android:layout_height="wrap_content"
                     app:pinWidth="@dimen/pad_30dp"
                     app:pinHeight="@dimen/pad_30dp"
-                    app:pinLength="4"
+                    app:pinLength="5"
                     app:cursorVisible="true"
                     app:forceKeyboard="true"
                     app:hint="0"

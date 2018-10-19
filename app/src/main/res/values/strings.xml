@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mercury</string>
-
+    <string name="ok">OK</string>
     <!-- Network error messages -->
     <string name="error_unexpected_error">Something went wrong. Please try again later</string>
     <string name="error_bad_connection_try_again">Bad connectivity, please try again</string>
@@ -11,6 +11,9 @@
     <string name="error_fb_login_failed">Facebook Login failed!!</string>
     <string name="error_session_expired">Session expired.</string>
 
+    <string name="internet_error">Network error, please try again</string>
+    <string name="error_try_again">Error, please try again</string>
+    <string name="server_error_try_again">Server error, please try again</string>
 
     <string name="login_online">Verifying credentials...</string>
     <string name="login_offline">Your device needs to be online in order to login. Please check your connection settings.</string>
@@ -44,7 +47,11 @@
     <string name="confim">Confirm</string>
     <string name="resend">Resend OTP</string>
     <string name="error_wrong_otp">You have entered a wrong OTP.</string>
+    <string name="blank_otp">OTP can not be blank.</string>
+    <string name="otp_permission">For use OTP service, user have need to accept permission of Read Message Service.</string>
     <string name="otp_message">A One Time Password (OTP) has been sent to your mobile number.</string>
+    <string name="otp_verify">Verifying OTP...</string>
+    <string name="create_account">Creating Account...</string>
 
 
     <!--API key for Testing-->
