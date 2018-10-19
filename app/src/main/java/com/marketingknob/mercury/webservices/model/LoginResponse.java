@@ -5,30 +5,53 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
-
-    @SerializedName("response")
+    @SerializedName("error")
     @Expose
-    private Response response;
+    private Boolean error;
+    @SerializedName("response_code")
+    @Expose
+    private Integer responseCode;
+    @SerializedName("message")
+    @Expose
+    private String message;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
-    public Response getResponse() {
-        return response;
+    public Boolean getError() {
+        return error;
     }
 
-    public void setResponse(Response response) {
-        this.response = response;
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
-    public class Response {
+    public Integer getResponseCode() {
+        return responseCode;
+    }
 
-        @SerializedName("code")
-        @Expose
-        private String code;
-        @SerializedName("msg")
-        @Expose
-        private String msg;
-        @SerializedName("id")
-        @Expose
-        private String id;
+    public void setResponseCode(Integer responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public class User {
+
         @SerializedName("name")
         @Expose
         private String name;
@@ -38,39 +61,6 @@ public class LoginResponse {
         @SerializedName("phone")
         @Expose
         private String phone;
-        @SerializedName("address")
-        @Expose
-        private String address;
-        @SerializedName("user_type")
-        @Expose
-        private String user_type;
-        @SerializedName("service_category_id")
-        @Expose
-        private String service_category_id;
-
-        public String getCode() {
-            return code;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-
-        public String getMsg() {
-            return msg;
-        }
-
-        public void setMsg(String msg) {
-            this.msg = msg;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
 
         public String getName() {
             return name;
@@ -96,30 +86,5 @@ public class LoginResponse {
             this.phone = phone;
         }
 
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public String getUser_type() {
-            return user_type;
-        }
-
-        public void setUser_type(String user_type) {
-            this.user_type = user_type;
-        }
-
-        public String getService_category_id() {
-            return service_category_id;
-        }
-
-        public void setService_category_id(String service_category_id) {
-            this.service_category_id = service_category_id;
-        }
-
     }
-
 }

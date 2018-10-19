@@ -68,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.ccp)                 CountryCodePicker countryCodePicker;
     @BindView(R.id.pinview)             Pinview pinview;
 
-    public String strEmail ="", strUsername ="", strPhone ="", strDeviceId ="",strOtp="";
+    public String strEmail ="", strUsername ="", strPhone ="", strDeviceId ="",strOtp="",strUserId="";
     public int counter;
     private static final String TAG = "SignUpActivity";
     ProgressDialog pd;
@@ -118,6 +118,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             otpValidation();
         }
         else if (v==btnResendOtp){
+            CommonUtil.hideKeyboard(SignUpActivity.this);
             llMain.setVisibility(View.VISIBLE);
             llOtp.setVisibility(View.GONE);
         }
@@ -172,11 +173,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
      */
     private void otpValidation() {
         Log.d(TAG, "otpValidation: "+strOtp);
-
+        CommonUtil.hideKeyboard(SignUpActivity.this);
         if (!strOtp.equalsIgnoreCase("")) {
             pd = ProgressDialogUtil.getProgressDialogMsg(SignUpActivity.this, getResources().getString(R.string.otp_verify));
             pd.show();
-            new ApiHelper().verifyOtp(strOtp,SignUpActivity.this);
+            new ApiHelper().verifyOtp(strOtp,strUserId,SignUpActivity.this);
 
         } else {
             DialogUtil.showDialogMsg(SignUpActivity.this, "Blank OTP", getResources().getString(R.string.blank_otp));
@@ -263,8 +264,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 //                .setRationaleTitle("Runtime permission")
 //                .setRationaleMessage("If u use the services of app you need to Confirm Runtime Permission")
                 .setDeniedTitle("Permission denied")
-                .setDeniedMessage(
-                        "If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
                 .setGotoSettingButtonText("Go to setting")
                 .setPermissions(Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS)
                 .check();
@@ -286,7 +286,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 btnResendOtp.setVisibility(View.VISIBLE);
             }
         }.start();
-
     }
 
     @Override
@@ -310,6 +309,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             if(signupResponse != null) {
                 if (!signupResponse.getError()) {
                     SnackBarUtil.showSnackBar(SignUpActivity.this,signupResponse.getMessage(),llTop);
+                    strUserId  = String.valueOf(signupResponse.getUser().getUserid());
+
                     llMain.setVisibility(View.GONE);
                     tvNumber.setText(strPhone);
                     llOtp.setVisibility(View.VISIBLE);
@@ -325,6 +326,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
 
+        //For
        else if(typeApi.equalsIgnoreCase("verifyOTP")) {
             OtpResponse otpResponse = new Gson().fromJson(response.body(), OtpResponse.class);
             if(otpResponse != null) {

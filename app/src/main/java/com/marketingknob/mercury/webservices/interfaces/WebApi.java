@@ -16,15 +16,13 @@ public interface WebApi {
 
     @FormUrlEncoded
     @POST(WebConstants.SIGNUP_USER_URL)
-    Call<JsonElement> signUpUser(@Field("name") String name,
-                                 @Field("phone") String phone, @Field("device_id") String device_id,
+    Call<JsonElement> signUpUser(@Field("name") String name, @Field("phone") String phone, @Field("device_id") String device_id,
                                  @Field("device_type") String device_type, @Field("email") String email);
     @FormUrlEncoded
     @POST(WebConstants.LOGIN_URL)
-    Call<JsonElement> login(@Field("email") String email, @Field("password") String password, @Field("user_type") String user_type,
-                            @Field("device_type") String device_type, @Field("device_token") String device_token);
+    Call<JsonElement> login(@Field("phone") String phone);
     @FormUrlEncoded
     @POST(WebConstants.VERIFY_OTP)
-    Call<JsonElement> verifyOtp(@Field("otp") String otp);
+    Call<JsonElement> verifyOtp(@Field("otp") String otp,@Field("user_id") String userid);
 
 }

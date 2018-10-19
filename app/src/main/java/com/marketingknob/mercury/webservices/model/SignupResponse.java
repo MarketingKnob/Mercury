@@ -56,6 +56,9 @@ public class SignupResponse {
         @SerializedName("otp")
         @Expose
         private Integer otp;
+        @SerializedName("userid")
+        @Expose
+        private Integer userid;
 
         public Integer getOtp() {
             return otp;
@@ -63,6 +66,14 @@ public class SignupResponse {
 
         public void setOtp(Integer otp) {
             this.otp = otp;
+        }
+
+        public Integer getUserid() {
+            return userid;
+        }
+
+        public void setUserid(Integer userid) {
+            this.userid = userid;
         }
 
     }

@@ -12,32 +12,44 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
+import com.marketingknob.mercury.util.ProgressDialogUtil;
+import com.marketingknob.mercury.util.SnackBarUtil;
+import com.marketingknob.mercury.webservices.ApiHelper;
+import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
+import com.marketingknob.mercury.webservices.model.LoginResponse;
 import com.rilixtech.CountryCodePicker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Response;
 
 /**
  * Created by Akshya on 5/10/2018.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ApiResponseHelper {
 
     ProgressDialog pd;
     Context context;
+    private static final String TAG = "LoginActivity";
+    String strPhone ="";
 
     @BindView(R.id.btn_login_in)        AppCompatButton btnSignIn;
     @BindView(R.id.input_phone)         AppCompatEditText etPhone;
     @BindView(R.id.input_layout_phone)  TextInputLayout inputLayoutPhone;
     @BindView(R.id.tv_create_new)       AppCompatTextView tvCreateNew;
     @BindView(R.id.ll_main)             LinearLayoutCompat llMain;
+    @BindView(R.id.ll_top)              LinearLayoutCompat llTop;
     @BindView(R.id.ccp)                 CountryCodePicker ccp;
 
     @Override
@@ -98,14 +110,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!validatePhone()) {
             return;
         }
-        Toast.makeText(context, "Sucess", Toast.LENGTH_SHORT).show();
+        pd = ProgressDialogUtil.getProgressDialogMsg(LoginActivity.this, getResources().getString(R.string.login_online));
+        pd.show();
+        new ApiHelper().login(strPhone,LoginActivity.this);
     }
 
 
     private boolean validatePhone() {
-        String phone = etPhone.getText().toString().trim();
+        strPhone = etPhone.getText().toString().trim();
 
-        if (phone.isEmpty() || !CommonUtil.isValidnumber(phone)) {
+        if (strPhone.isEmpty() || !CommonUtil.isValidnumber(strPhone)) {
             DialogUtil.showDialogMsg(LoginActivity.this, "Number Error", getResources().getString(R.string.error_wrong_number));
             return false;
 
@@ -140,6 +154,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public void onSuccess(Response<JsonElement> response, String typeApi) {
+        dismissDialog();
+        if(typeApi.equalsIgnoreCase("login")) {
+            LoginResponse loginResponse = new Gson().fromJson(response.body(), LoginResponse.class);
+            if(loginResponse != null) {
+                if (!loginResponse.getError()) {
+
+                    Log.d(TAG, "onSuccess: "+loginResponse.getUser().getPhone()+" Email"+loginResponse.getUser().getEmail()
+                    +" Phone"+loginResponse.getUser().getPhone());
+                    Toast.makeText(context, ""+loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    SnackBarUtil.showSnackBar(LoginActivity.this,loginResponse.getMessage(),llTop);
+                    CommonUtil.hideKeyboard(LoginActivity.this);
+                    Animatoo.animateInAndOut(LoginActivity.this);
+                    startActivity(new Intent(LoginActivity.this, ClubLocationActivity.class));
+                    finish();
+
+                } else {
+                    DialogUtil.showDialogMsg(LoginActivity.this, "Error", loginResponse.getMessage());
+                }
+            } else {
+                DialogUtil.showDialogMsg(LoginActivity.this, "Error", getResources().getString(R.string.error_try_again));
+            }
+        }
+
+    }
+
+    @Override
+    public void onFailure(String error) {
+        dismissDialog();
+        DialogUtil.showDialogMsg(LoginActivity.this, "Server Error", getResources().getString(R.string.server_error_try_again));
+    }
 
     private void dismissDialog() {
         try {

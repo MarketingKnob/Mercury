@@ -15,10 +15,10 @@ public class ApiHelper {
     private ApiResponseHelper apiResponseHelper;
 
     //Login Otp
-    public void login(String email, String password, String userType, final ApiResponseHelper apiResponseHelper) {
+    public void login(String phone, final ApiResponseHelper apiResponseHelper) {
 
         this.apiResponseHelper = apiResponseHelper;
-        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).login(email, password, userType, "android", "");
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).login(phone);
 
         call.enqueue(new Callback<JsonElement>() {
             @Override
@@ -55,12 +55,11 @@ public class ApiHelper {
         });
     }
 
-    //Sign Up User
-    public void verifyOtp(String otp,
-                           final ApiResponseHelper apiResponseHelper) {
+    //Verify Otp
+    public void verifyOtp(String otp, String userid,final ApiResponseHelper apiResponseHelper) {
 
         this.apiResponseHelper = apiResponseHelper;
-        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).verifyOtp(otp);
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).verifyOtp(otp,userid);
 
         call.enqueue(new Callback<JsonElement>() {
             @Override
