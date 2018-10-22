@@ -27,6 +27,7 @@ import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
 import com.marketingknob.mercury.util.ProgressDialogUtil;
 import com.marketingknob.mercury.util.SnackBarUtil;
+import com.marketingknob.mercury.util.TinyDB;
 import com.marketingknob.mercury.webservices.ApiHelper;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
 import com.marketingknob.mercury.webservices.model.OtpResponse;
@@ -72,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public int counter;
     private static final String TAG = "SignUpActivity";
     ProgressDialog pd;
+    TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +132,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     void init(){
 
         ButterKnife.bind(this);
+        tinyDB = new TinyDB(SignUpActivity.this);
         countryCodePicker.enableSetCountryByTimeZone(true);
         countryCodePicker.setClickable(false);
         llMain.setVisibility(View.VISIBLE);
@@ -289,19 +292,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        CommonUtil.hideKeyboard(SignUpActivity.this);
-        Animatoo.animateSlideLeft(SignUpActivity.this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        SmsReceiver.unbindListener();
-        super.onDestroy();
-    }
-
-    @Override
     public void onSuccess(Response<JsonElement> response, String typeApi) {
         dismissDialog();
         if(typeApi.equalsIgnoreCase("signup")) {
@@ -336,6 +326,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Log.d(TAG, "onSuccess: Phone"+otpResponse.getUser().getPhone()+" Name"+otpResponse.getUser().getName()
                     +" Email"+otpResponse.getUser().getEmail());
 
+                    tinyDB.putString("LoginUser",otpResponse.getUser().getPhone());
+                    Log.d(TAG, "onSuccess: TinyDB"+tinyDB.getString("LoginUser"));
+
                     CommonUtil.hideKeyboard(SignUpActivity.this);
                     Animatoo.animateInAndOut(SignUpActivity.this);
                     startActivity(new Intent(SignUpActivity.this, ClubLocationActivity.class));
@@ -366,6 +359,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        CommonUtil.hideKeyboard(SignUpActivity.this);
+        Animatoo.animateSlideLeft(SignUpActivity.this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        SmsReceiver.unbindListener();
+        super.onDestroy();
     }
 
 }

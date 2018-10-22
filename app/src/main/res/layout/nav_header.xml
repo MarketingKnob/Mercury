@@ -4,23 +4,35 @@
     android:background="@color/colorPrimary"
     android:padding="16dp">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="27dp"
-        android:src="@drawable/side_menu_placeholder" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/civ_profile"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/side_menu_placeholder"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:layout_width="match_parent"
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
-        android:text="   User"
+        android:layout_below="@+id/civ_profile"
+        android:layout_marginStart="@dimen/pad_15dp"
+        android:layout_marginTop="@dimen/pad_10dp"
+        android:text="Mercury"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_normal" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="LogOut"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_large"
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -15,13 +15,13 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+
 import com.appolica.flubber.Flubber;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.marketingknob.mercury.BuildConfig;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.util.RootUtil;
+import com.marketingknob.mercury.util.TinyDB;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -35,16 +35,18 @@ public class SplashActivity extends AppCompatActivity {
     AppCompatImageView ivSplashLogo;
     private static int SPLASH_TIME_OUT = 3000;
     private static final int REQ_CODE_PLAY_STORE = 1001;
+    TinyDB tinyDB;
+    private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        tinyDB = new TinyDB(this);
         findViewById();
 
-//        Animation myanim = AnimationUtils.loadAnimation(this,R.anim.fade_in);
-//        ivSplashLogo.startAnimation(myanim);
+        Log.d(TAG, "onCreate: "+tinyDB.getString("LoginUser"));
 
     }
 
@@ -96,11 +98,12 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-//    check for root
+    /**
+     *  check for root.
+     */
     void checkDeviceRoot(){
 
         if (RootUtil.isDeviceRooted()) {
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
             builder.setMessage(R.string.error_device_rooted);
             builder.setCancelable(false);
@@ -108,7 +111,13 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onClick(final DialogInterface dialog, final int which) {
                     printHashKey();
-                    nextScreenIntent();
+
+                    if (tinyDB.getString("LoginUser").equals("")){
+                        LoginScreenIntent();
+                    }else {
+                        HomeScreenIntent();
+                    }
+
                 }
             });
             builder.setNegativeButton(R.string.text_exit, new DialogInterface.OnClickListener() {
@@ -124,18 +133,38 @@ public class SplashActivity extends AppCompatActivity {
 
         } else {
             printHashKey();
-            nextScreenIntent();
+            if (tinyDB.getString("LoginUser").equals("")){
+                LoginScreenIntent();
+            }else {
+                HomeScreenIntent();
+            }
         }
     }
 
-//   Intent To Login Screen
-    void nextScreenIntent(){
+    /**
+     * Intent To Login Screen.
+     */
+    void LoginScreenIntent(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-//                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                Animatoo.animateInAndOut(SplashActivity.this);
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
+    }
+
+    /**
+     * Intent To Home Screen.
+     */
+    void HomeScreenIntent(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashActivity.this, ClubLocationActivity.class));
                 Animatoo.animateInAndOut(SplashActivity.this);
                 finish();
             }

@@ -5,7 +5,7 @@
     android:id="@+id/ll_top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_color_light"
+    android:background="@drawable/background"
     android:focusable="false"
     android:focusableInTouchMode="true"
     android:orientation="vertical"

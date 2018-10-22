@@ -24,6 +24,7 @@ import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
 import com.marketingknob.mercury.util.ProgressDialogUtil;
 import com.marketingknob.mercury.util.SnackBarUtil;
+import com.marketingknob.mercury.util.TinyDB;
 import com.marketingknob.mercury.webservices.ApiHelper;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
 import com.marketingknob.mercury.webservices.model.LoginResponse;
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Context context;
     private static final String TAG = "LoginActivity";
     String strPhone ="";
+    TinyDB tinyDB;
 
     @BindView(R.id.btn_login_in)        AppCompatButton btnSignIn;
     @BindView(R.id.input_phone)         AppCompatEditText etPhone;
@@ -66,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
 
     void init() {
-
+        tinyDB = new TinyDB(this);
         context = LoginActivity.this;
         ButterKnife.bind(this);
         btnSignIn.setOnClickListener(this);
@@ -165,6 +167,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d(TAG, "onSuccess: "+loginResponse.getUser().getPhone()+" Email"+loginResponse.getUser().getEmail()
                     +" Phone"+loginResponse.getUser().getPhone());
                     Toast.makeText(context, ""+loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    tinyDB.putString("LoginUser",loginResponse.getUser().getPhone());
+
                     SnackBarUtil.showSnackBar(LoginActivity.this,loginResponse.getMessage(),llTop);
                     CommonUtil.hideKeyboard(LoginActivity.this);
                     Animatoo.animateInAndOut(LoginActivity.this);

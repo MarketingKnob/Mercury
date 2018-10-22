@@ -1,14 +1,19 @@
 package com.marketingknob.mercury.util;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.Window;
 import android.widget.DatePicker;
 
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.ui.HomeActivity;
+import com.marketingknob.mercury.ui.LoginActivity;
 
 import static android.app.DatePickerDialog.OnDateSetListener;
 
@@ -77,20 +82,25 @@ public class DialogUtil {
     }
 
     /**
-     * @param context
+     * Logout Alert
      */
-    public void showDialogTwo(Context context){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    public static void LogoutDialog(final Activity context, final TinyDB tinyDB){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
 
 //                         Dialog with custom theme
 //        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
-        builder.setTitle("AlertDialog with No Buttons");
-        builder.setMessage("Hello, you can hide this message by just tapping outside the dialog box!");
+        builder.setTitle(context.getResources().getText(R.string.logout));
+        builder.setMessage(context.getResources().getText(R.string.logout_really));
         //Yes Button
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                tinyDB.clear();
+                Animatoo.animateFade(context);
+                Intent intent= new Intent(context,LoginActivity.class);
+                context.startActivity(intent);
+                context.startActivity(new Intent(context, LoginActivity.class));
+                context.finish();
             }
         });
 

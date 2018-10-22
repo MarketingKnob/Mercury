@@ -1,5 +1,7 @@
 package com.marketingknob.mercury.ui;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,15 +10,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.ui.fragments.FirstFragment;
 import com.marketingknob.mercury.ui.fragments.HomeFragment;
 import com.marketingknob.mercury.ui.fragments.SecondFragment;
 import com.marketingknob.mercury.ui.fragments.ThirdFragment;
+import com.marketingknob.mercury.util.DialogUtil;
+import com.marketingknob.mercury.util.SnackBarUtil;
+import com.marketingknob.mercury.util.TinyDB;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,10 +35,15 @@ import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
-    @BindView(R.id.lay_toolbar) View layToolbar;
-    @BindView(R.id.iv_drawer) AppCompatImageView ivDrawer;
-    @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
-    @BindView(R.id.nvView) NavigationView nvDrawer;
+    @BindView(R.id.lay_toolbar)         View layToolbar;
+    @BindView(R.id.iv_drawer)           AppCompatImageView ivDrawer;
+    @BindView(R.id.drawer_layout)       DrawerLayout mDrawer;
+    @BindView(R.id.nvView)              NavigationView nvDrawer;
+    @BindView(R.id.ll_main)             LinearLayoutCompat llMain;
+
+    AppCompatTextView tvLogout;
+    TinyDB tinyDB;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +57,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     void init(){
 
         ButterKnife.bind(this);
+        tinyDB  = new TinyDB(this);
         setupDrawerContent(nvDrawer);
-        ivDrawer.setOnClickListener(this);
 
         View headerLayout = nvDrawer.getHeaderView(0);
-//        ImageView ivHeaderPhoto = headerLayout.findViewById(R.id.imageView);
+        tvLogout          = headerLayout.findViewById(R.id.tv_logout);
 
+        ivDrawer.setOnClickListener(this);
+        tvLogout.setOnClickListener(this);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.flContent, new HomeFragment());
@@ -109,6 +124,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 mDrawer.openDrawer(Gravity.LEFT);
             }
+        }else if (view==tvLogout){
+            DialogUtil.LogoutDialog(HomeActivity.this,tinyDB);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        SnackBarUtil.showSnackBar(HomeActivity.this,"Please click BACK again to exit",llMain);
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }
