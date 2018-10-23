@@ -187,5 +187,4 @@ public final class CommonUtil {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-
 }

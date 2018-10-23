@@ -77,4 +77,10 @@ dependencies {
 
     //Circular Image View
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //Image Slider
+    implementation 'com.github.ApendIr:slider:1.0'
+
+    /*Floating Menu Button*/
+    implementation 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
 }

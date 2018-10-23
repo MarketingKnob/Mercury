@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_drink"
+            android:layout_width="@dimen/pad_70dp"
+            android:layout_height="150dp"
+            android:layout_margin="@dimen/pad_15dp"
+            android:src="@drawable/bottal" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_drink_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="37dp"
+            android:text="Debum Lorem"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_large" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_drink_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_drink_name"
+            android:layout_alignStart="@+id/tv_drink_name"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:text="Sed Debute Ipum Follow"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_small" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_drink_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_drink_desc"
+            android:layout_alignStart="@+id/tv_drink_name"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:text="Price: 400"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_small" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/tv_drink_price"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/addtocart"
+            android:text="ADD TO CART"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_small" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/pad_48dp"
+            android:layout_height="@dimen/pad_48dp"
+            android:layout_alignTop="@+id/tv_drink_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/plus" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

@@ -9,6 +9,7 @@
     <dimen name="font_normal">14sp</dimen>
     <dimen name="font_small">12sp</dimen>
     <dimen name="font_xsmall">10sp</dimen>
+    <dimen name="font_xxsmall">8sp</dimen>
 
 
     <!-- typical spacing between two views -->
@@ -41,5 +42,6 @@
     <dimen name="pad_60dp">60dp</dimen>
     <dimen name="pad_70dp">70dp</dimen>
     <dimen name="pad_80dp">80dp</dimen>
+    <dimen name="pad_100dp">100dp</dimen>
 
 </resources>

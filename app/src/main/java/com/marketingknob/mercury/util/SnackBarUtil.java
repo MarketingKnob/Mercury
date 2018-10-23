@@ -20,7 +20,7 @@ public class SnackBarUtil {
         Snackbar snackbar = Snackbar.make( lay, message, Snackbar.LENGTH_LONG ).setAction(  ac.getString(R.string.ok), onSnackBarClickListener() );
         snackbar.setActionTextColor( ac.getResources().getColor( R.color.white ) );
         View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(ac.getResources().getColor( R.color.main_color ));
+        snackbarView.setBackgroundColor(ac.getResources().getColor( R.color.red ));
         TextView textView   = (TextView) snackbarView.findViewById( android.support.design.R.id.snackbar_text);
         //textView.setTextColor(getResources().getColor(R.color.buttonbackground));
         textView.setTextColor( ContextCompat.getColor(ac, R.color.white));

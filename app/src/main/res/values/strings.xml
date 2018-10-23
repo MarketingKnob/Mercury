@@ -32,14 +32,14 @@
     <string name="mobile">Enter your registered number <sup>*</sup></string>
     <string name="name"> Username <sup>*</sup></string>
     <string name="login"> Login Securely</string>
-    <string name="already_acc">Create a new account </string>
+    <string name="already_acc">Create a new account ! </string>
     <string name="error_wrong_number">You have entered a wrong mobile number.</string>
 
     <!--SignIn Screen-->
 
     <string name="hint_email">Email (optional)</string>
     <string name="btn_sign_up">Create a New Account</string>
-    <string name="login_mercury">Login to Mercury</string>
+    <string name="login_mercury">Login to Mercury !</string>
     <string name="err_msg_email">You have entered a invalid email address.</string>
     <string name="err_msg_username">Please enter your username.</string>
     <string name="otp"> Enter OTP</string>
@@ -71,5 +71,11 @@
         <item>Camera</item>
         <item>Gallery</item>
     </string-array>
+
+    <!--Home Screen-->
+    <string name="products">Products</string>
+    <string name="popular">Popular</string>
+    <string name="filter">Filter</string>
+    <string name="search">Search Products</string>
 
 </resources>

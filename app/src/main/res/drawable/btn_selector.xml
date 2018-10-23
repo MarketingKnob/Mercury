@@ -7,7 +7,7 @@
     <!-- focused -->
     <item android:drawable="@drawable/buttton_unselected_shape"
         android:state_focused="true"
-        android:color="@color/main_color" />
+        android:color="@color/red" />
     <!-- default -->
     <item android:drawable="@drawable/buttton_selected_shape" />
 

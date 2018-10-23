@@ -1,17 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.marketingknob.mercury.ui.fragments.HomeFragment"
-    android:background="@color/green">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.marketingknob.mercury.ui.fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home Screen"
-        android:gravity="center"
-        android:textColor="@color/white"/>
+        android:layout_height="@dimen/pad_60dp"
+        android:background="@color/black"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/pad_48dp"
+            android:layout_marginTop="@dimen/pad_15dp"
+            android:layout_marginEnd="@dimen/pad_30dp"
+            android:layout_marginBottom="@dimen/pad_10dp"
+            android:layout_toLeftOf="@+id/iv_logout"
+            android:background="@drawable/search_back"
+            android:focusable="false"
+            app:defaultQueryHint="@string/search"
+            app:iconifiedByDefault="false"
+            app:searchIcon="@null" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_logout"
+            android:layout_width="@dimen/pad_30dp"
+            android:layout_height="@dimen/pad_30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/pad_15dp"
+            android:src="@drawable/logout" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <ir.apend.slider.ui.Slider
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:animateIndicators="true"
+            app:defaultIndicators="circle"
+            app:indicatorSize="8dp"
+            app:intervalSecond="5"
+            app:loopSlides="true" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_drink_catg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="@dimen/pad_10dp"
+        android:background="@color/light_red" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/pad_10dp"
+            android:text="@string/products"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/popular"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/pad_10dp"
+            android:text="@string/filter"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_normal" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/light_red" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_drink_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pad_15dp" />
+
+</android.support.v7.widget.LinearLayoutCompat>
