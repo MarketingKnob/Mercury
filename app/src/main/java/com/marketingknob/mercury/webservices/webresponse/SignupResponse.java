@@ -1,9 +1,14 @@
-package com.marketingknob.mercury.webservices.model;
+package com.marketingknob.mercury.webservices.webresponse;
+
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class OtpResponse {
+/**
+ * Created by Akshay on 18/10/2018.
+ */
+
+public class SignupResponse {
 
     @SerializedName("error")
     @Expose
@@ -52,38 +57,27 @@ public class OtpResponse {
 
     public class User {
 
-        @SerializedName("name")
+        @SerializedName("otp")
         @Expose
-        private String name;
-        @SerializedName("email")
+        private Integer otp;
+        @SerializedName("userid")
         @Expose
-        private String email;
-        @SerializedName("phone")
-        @Expose
-        private String phone;
+        private Integer userid;
 
-        public String getName() {
-            return name;
+        public Integer getOtp() {
+            return otp;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setOtp(Integer otp) {
+            this.otp = otp;
         }
 
-        public String getEmail() {
-            return email;
+        public Integer getUserid() {
+            return userid;
         }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
+        public void setUserid(Integer userid) {
+            this.userid = userid;
         }
 
     }

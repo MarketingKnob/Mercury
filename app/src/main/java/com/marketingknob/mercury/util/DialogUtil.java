@@ -12,7 +12,6 @@ import android.widget.DatePicker;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.marketingknob.mercury.R;
-import com.marketingknob.mercury.ui.HomeActivity;
 import com.marketingknob.mercury.ui.LoginActivity;
 
 import static android.app.DatePickerDialog.OnDateSetListener;

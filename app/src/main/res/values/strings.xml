@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Mercury</string>
     <string name="ok">OK</string>
+
     <!-- Network error messages -->
     <string name="error_unexpected_error">Something went wrong. Please try again later</string>
     <string name="error_bad_connection_try_again">Bad connectivity, please try again</string>
@@ -25,7 +26,7 @@
     <string name="text_proceed">Proceed</string>
     <string name="text_loading">Loading…</string>
     <string name="text_update">Update</string>
-
+    <string name="fetch_details">Fetching Data...</string>
 
     <!--Login Screen-->
 

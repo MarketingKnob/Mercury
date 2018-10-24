@@ -14,7 +14,7 @@ public class ApiHelper {
 
     private ApiResponseHelper apiResponseHelper;
 
-    //Login Otp
+    /*/Login Otp/*/
     public void login(String phone, final ApiResponseHelper apiResponseHelper) {
 
         this.apiResponseHelper = apiResponseHelper;
@@ -34,7 +34,7 @@ public class ApiHelper {
         });
     }
 
-    //Sign Up User
+    /*Sign Up User*/
     public void signUpUser(String name,String phone,String deviceId,String email,
                            final ApiResponseHelper apiResponseHelper) {
 
@@ -49,13 +49,12 @@ public class ApiHelper {
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
-                Log.e("Login_Exp", "//" + t.getMessage());
                 apiResponseHelper.onFailure(t.getMessage());
             }
         });
     }
 
-    //Verify Otp
+     /*Verify Otp*/
     public void verifyOtp(String otp, String userid,final ApiResponseHelper apiResponseHelper) {
 
         this.apiResponseHelper = apiResponseHelper;
@@ -69,7 +68,44 @@ public class ApiHelper {
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
-                Log.e("Login_Exp", "//" + t.getMessage());
+                apiResponseHelper.onFailure(t.getMessage());
+            }
+        });
+    }
+
+    /*Get BANNER*/
+    public void getBanner(final ApiResponseHelper apiResponseHelper) {
+
+        this.apiResponseHelper = apiResponseHelper;
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).getBanner();
+
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                apiResponseHelper.onSuccess(response, "Banner");
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                apiResponseHelper.onFailure(t.getMessage());
+            }
+        });
+    }
+
+  /*Get Drink Category*/
+    public void getDrinkCategory(final ApiResponseHelper apiResponseHelper) {
+
+        this.apiResponseHelper = apiResponseHelper;
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).getDrinkCategory();
+
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                apiResponseHelper.onSuccess(response, "DrinkCategory");
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
                 apiResponseHelper.onFailure(t.getMessage());
             }
         });

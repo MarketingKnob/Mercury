@@ -15,7 +15,6 @@ import android.view.View;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.goodiebag.pinview.Pinview;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.gun0912.tedpermission.PermissionListener;
@@ -30,8 +29,8 @@ import com.marketingknob.mercury.util.SnackBarUtil;
 import com.marketingknob.mercury.util.TinyDB;
 import com.marketingknob.mercury.webservices.ApiHelper;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
-import com.marketingknob.mercury.webservices.model.OtpResponse;
-import com.marketingknob.mercury.webservices.model.SignupResponse;
+import com.marketingknob.mercury.webservices.webresponse.OtpResponse;
+import com.marketingknob.mercury.webservices.webresponse.SignupResponse;
 import com.rilixtech.CountryCodePicker;
 
 import butterknife.BindView;
@@ -39,7 +38,6 @@ import butterknife.ButterKnife;
 import retrofit2.Response;
 
 import android.os.CountDownTimer;
-import android.widget.Toast;
 
 import java.util.List;
 

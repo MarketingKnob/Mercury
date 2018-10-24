@@ -1,6 +1,8 @@
 package com.marketingknob.mercury.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.model.DrinkCategoryModel;
 
 import java.util.ArrayList;
 
@@ -20,18 +24,24 @@ import java.util.ArrayList;
 public class RvDrinkCategory extends RecyclerView.Adapter<RvDrinkCategory.MyViewHolder> {
 
     private Context context;
+    private ArrayList<DrinkCategoryModel> drinkCategoryModelArrayList = new ArrayList<>();
 
-    public RvDrinkCategory(Context context) {
+    public RvDrinkCategory(Context context, ArrayList<DrinkCategoryModel> drinkCategoryModelArrayList) {
         this.context = context;
+        this.drinkCategoryModelArrayList = drinkCategoryModelArrayList;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayoutCompat llDrink;
+        AppCompatImageView ivDrink;
+        AppCompatTextView  tvDrink;
 
 
         public MyViewHolder(View view) {
             super(view);
+
+            ivDrink     = view.findViewById(R.id.iv_drink_icon);
+            tvDrink     = view.findViewById(R.id.tv_drink_name);
 
         }
     }
@@ -51,11 +61,13 @@ public class RvDrinkCategory extends RecyclerView.Adapter<RvDrinkCategory.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
+        holder.tvDrink.setText(drinkCategoryModelArrayList.get(position).getStrName());
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return drinkCategoryModelArrayList.size();
     }
 }

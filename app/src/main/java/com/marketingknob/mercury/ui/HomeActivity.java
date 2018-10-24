@@ -1,150 +1,145 @@
 package com.marketingknob.mercury.ui;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.ui.fragments.FirstFragment;
 import com.marketingknob.mercury.ui.fragments.HomeFragment;
 import com.marketingknob.mercury.ui.fragments.SecondFragment;
 import com.marketingknob.mercury.ui.fragments.ThirdFragment;
-import com.marketingknob.mercury.util.DialogUtil;
+import com.marketingknob.mercury.util.BottomNavigationViewHelper;
 import com.marketingknob.mercury.util.SnackBarUtil;
-import com.marketingknob.mercury.util.TinyDB;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Akshya on 10/10/2018.
+ * Created by Akshya on 23/10/2018.
  */
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity {
 
-    @BindView(R.id.lay_toolbar)         View layToolbar;
-    @BindView(R.id.iv_drawer)           AppCompatImageView ivDrawer;
-    @BindView(R.id.drawer_layout)       DrawerLayout mDrawer;
-    @BindView(R.id.nvView)              NavigationView nvDrawer;
-    @BindView(R.id.ll_main)             LinearLayoutCompat llMain;
+    HomeFragment homeFragment;
+    FirstFragment firstFragment;
+    SecondFragment secondFragment;
+    ThirdFragment thirdFragment;
 
-    AppCompatTextView tvLogout;
-    TinyDB tinyDB;
+    Fragment currentFragment = null;
+    FragmentTransaction ft;
+    BottomNavigationView bottomNavigationView;
+    private int backPress=0;
     boolean doubleBackToExitPressedOnce = false;
+
+    @BindView(R.id.rl_main) RelativeLayout rlMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_new);
+        setupTabLayout();
 
-        init();
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView_broker);
+        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
-    }
+        ft = getSupportFragmentManager().beginTransaction();
+        currentFragment = homeFragment;
+        ft.replace(R.id.main_broker_frame, currentFragment);
+        ft.addToBackStack(null);
+        ft.commit();
 
-    void init(){
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
 
-        ButterKnife.bind(this);
-        tinyDB  = new TinyDB(this);
-        setupDrawerContent(nvDrawer);
+                    case R.id.bn_home:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        currentFragment = homeFragment;
+                        ft.replace(R.id.main_broker_frame, currentFragment);
+                        ft.commit();
+                        break;
 
-        View headerLayout = nvDrawer.getHeaderView(0);
-        tvLogout          = headerLayout.findViewById(R.id.tv_logout);
+                    case R.id.bn_notification:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        currentFragment = firstFragment;
+                        ft.replace(R.id.main_broker_frame, currentFragment);
+                        ft.commit();
+                        break;
 
-        ivDrawer.setOnClickListener(this);
-        tvLogout.setOnClickListener(this);
+                    case R.id.bn_account:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        currentFragment = secondFragment;
+                        ft.replace(R.id.main_broker_frame, currentFragment);
+                        ft.commit();
+                        break;
 
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.flContent, new HomeFragment());
-        tx.commit();
+                    case R.id.bn_more:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        currentFragment = thirdFragment ;
+                        ft.replace(R.id.main_broker_frame, currentFragment);
+                        ft.commit();
+                        break;
+                }
 
-    }
-
-        private void setupDrawerContent (NavigationView navigationView){
-            navigationView.setNavigationItemSelectedListener(
-                    new NavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(MenuItem menuItem) {
-                            selectDrawerItem(menuItem);
-                            return true;
-                        }
-                    });
-        }
-
-        public void selectDrawerItem (MenuItem menuItem){
-            Fragment fragment = null;
-            Class fragmentClass;
-            switch (menuItem.getItemId()) {
-                case R.id.nav_default_fragment:
-                    fragmentClass = HomeFragment.class;
-                    break;
-                    case R.id.nav_first_fragment:
-                    fragmentClass = FirstFragment.class;
-                    break;
-                case R.id.nav_second_fragment:
-                    fragmentClass = SecondFragment.class;
-                    break;
-                case R.id.nav_third_fragment:
-                    fragmentClass = ThirdFragment.class;
-                    break;
-                default:
-                    fragmentClass = HomeFragment.class;
+                return true;
             }
-
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-            menuItem.setChecked(true);
-            setTitle(menuItem.getTitle());
-            mDrawer.closeDrawers();
-        }
-
-    @Override
-    public void onClick(View view) {
-        if (view==ivDrawer){
-            if (mDrawer.isDrawerOpen(Gravity.LEFT)) {
-                mDrawer.closeDrawer(Gravity.LEFT);
-            } else {
-                mDrawer.openDrawer(Gravity.LEFT);
-            }
-        }else if (view==tvLogout){
-            DialogUtil.LogoutDialog(HomeActivity.this,tinyDB);
-        }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView_broker);
+        int seletedItemId = bottomNavigationView.getSelectedItemId();
+        if (R.id.bn_home != seletedItemId) {
+            setHomeItem(this);
         }
-
-        this.doubleBackToExitPressedOnce = true;
-        SnackBarUtil.showSnackBar(HomeActivity.this,"Please click BACK again to exit",llMain);
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
+        else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                finish();
+                return;
             }
-        }, 2000);
+
+            this.doubleBackToExitPressedOnce = true;
+            SnackBarUtil.showSnackBar(this,"Please click BACK again to exit",rlMain);
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
+        }
+    }
+
+    public static void setHomeItem(Activity activity) {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                activity.findViewById(R.id.bottomNavigationView_broker);
+        bottomNavigationView.setSelectedItemId(R.id.bn_home);
+    }
+
+
+    private void setupTabLayout() {
+
+        ButterKnife.bind(this);
+
+        homeFragment          = new HomeFragment();
+        firstFragment         = new FirstFragment();
+        secondFragment        = new SecondFragment();
+        thirdFragment         = new ThirdFragment();
+
     }
 }

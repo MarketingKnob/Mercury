@@ -35,6 +35,7 @@
     <dimen name="pad_5dp">5.0dp</dimen>
     <dimen name="pad_10dp">10.0dp</dimen>
     <dimen name="pad_15dp">15dp</dimen>
+    <dimen name="pad_20dp">20dp</dimen>
     <dimen name="pad_24dp">24dp</dimen>
     <dimen name="pad_30dp">30dp</dimen>
     <dimen name="pad_38dp">38dp</dimen>
@@ -43,5 +44,11 @@
     <dimen name="pad_70dp">70dp</dimen>
     <dimen name="pad_80dp">80dp</dimen>
     <dimen name="pad_100dp">100dp</dimen>
+
+    <!--Floating Layout and Button Sizes -->
+
+    <dimen name="float_btn_icon_dimensions">36dp</dimen>
+    <dimen name="float_btn_icon_size">70dp</dimen>
+    <dimen name="float_btn_layout_dimension">90dp</dimen>
 
 </resources>

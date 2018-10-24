@@ -27,7 +27,7 @@ import com.marketingknob.mercury.util.SnackBarUtil;
 import com.marketingknob.mercury.util.TinyDB;
 import com.marketingknob.mercury.webservices.ApiHelper;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
-import com.marketingknob.mercury.webservices.model.LoginResponse;
+import com.marketingknob.mercury.webservices.webresponse.LoginResponse;
 import com.rilixtech.CountryCodePicker;
 
 import butterknife.BindView;

@@ -1,8 +1,12 @@
-package com.marketingknob.mercury.webservices.model;
+package com.marketingknob.mercury.webservices.webresponse;
 
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+/**
+ * Created by Akshay on 15/10/2018.
+ */
 
 public class LoginResponse {
     @SerializedName("error")
