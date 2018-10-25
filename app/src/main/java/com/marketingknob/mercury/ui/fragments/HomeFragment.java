@@ -1,9 +1,5 @@
 package com.marketingknob.mercury.ui.fragments;
 
-
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,10 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -29,8 +22,6 @@ import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.adapter.RvDrinkCategory;
 import com.marketingknob.mercury.adapter.RvDrinkDetails;
 import com.marketingknob.mercury.model.DrinkCategoryModel;
-import com.marketingknob.mercury.ui.LoginActivity;
-import com.marketingknob.mercury.ui.SignUpActivity;
 import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
 import com.marketingknob.mercury.util.FloatingButton;
@@ -42,11 +33,6 @@ import com.marketingknob.mercury.webservices.WebConstants;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
 import com.marketingknob.mercury.webservices.webresponse.BannerResponse;
 import com.marketingknob.mercury.webservices.webresponse.DrinkCategoryResponse;
-import com.marketingknob.mercury.webservices.webresponse.SignupResponse;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
-import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +65,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
     ArrayList<DrinkCategoryModel> drinkCategoryModelArrayList;
     private static final String TAG = "HomeFragment";
     String strBannerUrl="",strBaseUrl="",strDrinkCateUrl="";
+
+    public String strCategoryId="";
 
     public HomeFragment() {
 
@@ -114,7 +102,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
         ivLogOut.setOnClickListener(this);
         llMain.setOnClickListener(this);
 
-
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.red));
         searchEditText.setHintTextColor(getResources().getColor(R.color.red));
@@ -124,7 +111,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rViewDrink.setLayoutManager(layoutManager);
         rViewDrink.setItemAnimator(new DefaultItemAnimator());
-
 
         /*Drink Details RecyclerView Configure*/
         final LinearLayoutManager layoutManager1 = new LinearLayoutManager(context);
@@ -136,12 +122,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
 
         FloatingButton.floatingWorking(context,getActivity());
 
-
         pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.fetch_details));
         pd.show();
         new ApiHelper().getBanner( HomeFragment.this);
         new ApiHelper().getDrinkCategory( HomeFragment.this);
-
 
     }
 
@@ -168,7 +152,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
             BannerResponse bannerResponse = new Gson().fromJson(response.body(), BannerResponse.class);
             if(bannerResponse != null) {
                 if (!bannerResponse.getError()) {
-
                     for (int i = 0; i <bannerResponse.getImages().getBanner().size() ; i++) {
 
                         String strBannerPath = bannerResponse.getImages().getBanner().get(i);
@@ -193,7 +176,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
             if(drinkCategoryResponse != null) {
                 if (!drinkCategoryResponse.getError()) {
 
+                    strCategoryId = drinkCategoryResponse.getCategory().getResult().get(0).getId();
+                    Log.d(TAG, "productDetail:Before "+strCategoryId);
+
                     for (int i = 0; i <drinkCategoryResponse.getCategory().getResult().size() ; i++) {
+
 
                         DrinkCategoryModel drinkCategoryModel = new DrinkCategoryModel();
 
@@ -207,7 +194,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
                         drinkCategoryModelArrayList.add(drinkCategoryModel);
                     }
 
-                    rvDrinkCategory = new RvDrinkCategory(context,drinkCategoryModelArrayList);
+                    rvDrinkCategory = new RvDrinkCategory(context,drinkCategoryModelArrayList,HomeFragment.this);
                     rViewDrink.setAdapter(rvDrinkCategory);
 
                 } else {
@@ -236,6 +223,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    public void productDetail(String strCategId){
+
+        Log.d(TAG, "productDetail:After "+strCategId);
+
+
     }
 
 }
