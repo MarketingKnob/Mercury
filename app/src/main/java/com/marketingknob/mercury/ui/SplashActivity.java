@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
         tinyDB = new TinyDB(this);
         findViewById();
 
-        Log.d(TAG, "onCreate: "+tinyDB.getString("LoginUser"));
+        Log.d(TAG, "onCreate: "+tinyDB.getString("LoginMobile"));
 
     }
 
@@ -112,7 +112,7 @@ public class SplashActivity extends AppCompatActivity {
                 public void onClick(final DialogInterface dialog, final int which) {
                     printHashKey();
 
-                    if (tinyDB.getString("LoginUser").equals("")){
+                    if (tinyDB.getString("LoginMobile").equals("")){
                         LoginScreenIntent();
                     }else {
                         HomeScreenIntent();
@@ -133,7 +133,7 @@ public class SplashActivity extends AppCompatActivity {
 
         } else {
             printHashKey();
-            if (tinyDB.getString("LoginUser").equals("")){
+            if (tinyDB.getString("LoginMobile").equals("")){
                 LoginScreenIntent();
             }else {
                 HomeScreenIntent();

@@ -33,6 +33,7 @@ import com.marketingknob.mercury.webservices.WebConstants;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
 import com.marketingknob.mercury.webservices.webresponse.BannerResponse;
 import com.marketingknob.mercury.webservices.webresponse.DrinkCategoryResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,14 +48,11 @@ import static com.marketingknob.mercury.util.FloatingButton.rightLowerMenu;
  * Created by Akshya on 23/10/2018.
  */
 
-public class HomeFragment extends Fragment implements View.OnClickListener,ApiResponseHelper {
+public class HomeFragment extends Fragment implements View.OnClickListener, ApiResponseHelper {
 
     Slider slider;
-    RecyclerView rViewDrink,rViewDetails;
-    SearchView searchView;
-    AppCompatImageView ivLogOut;
+    RecyclerView rViewDrink, rViewDetails;
     Context context;
-    TinyDB tinyDB;
     LinearLayoutCompat llMain;
 
     RvDrinkCategory rvDrinkCategory;
@@ -64,9 +62,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
     List<Slide> slideList;
     ArrayList<DrinkCategoryModel> drinkCategoryModelArrayList;
     private static final String TAG = "HomeFragment";
-    String strBannerUrl="",strBaseUrl="",strDrinkCateUrl="";
+    String strBannerUrl = "", strBaseUrl = "", strDrinkCateUrl = "";
 
-    public String strCategoryId="";
+    public String strCategoryId = "";
 
     public HomeFragment() {
 
@@ -76,35 +74,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         init(view);
 
         return view;
     }
 
-    void init(View view){
+    void init(View view) {
 
-        context                         = this.getActivity();
-        slideList                       = new ArrayList<>();
-        drinkCategoryModelArrayList     = new ArrayList<DrinkCategoryModel>();
-        slider                          = view.findViewById(R.id.slider);
+        context = this.getActivity();
+        slideList = new ArrayList<>();
+        drinkCategoryModelArrayList = new ArrayList<DrinkCategoryModel>();
+        slider = view.findViewById(R.id.slider);
 
-        rViewDrink                      = view.findViewById(R.id.rv_drink_catg);
-        rViewDetails                    = view.findViewById(R.id.rv_drink_detail);
-        searchView                      = view.findViewById(R.id.search_view);
-        ivLogOut                        = view.findViewById(R.id.iv_logout);
-        llMain                          = view.findViewById(R.id.ll_main);
+        rViewDrink      = view.findViewById(R.id.rv_drink_catg);
+        rViewDetails    = view.findViewById(R.id.rv_drink_detail);
+        llMain          = view.findViewById(R.id.ll_main);
 
-        tinyDB                          = new TinyDB(context);
-        strBaseUrl                      = WebConstants.BASE_URL;
+        strBaseUrl      = WebConstants.BASE_URL;
 
-        ivLogOut.setOnClickListener(this);
         llMain.setOnClickListener(this);
-
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.red));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.red));
 
         /*Drink Category RecyclerView Configure*/
         final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
@@ -120,20 +110,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
         rvDrinkDetails = new RvDrinkDetails(context);
         rViewDetails.setAdapter(rvDrinkDetails);
 
-        FloatingButton.floatingWorking(context,getActivity());
+        FloatingButton.floatingWorking(context, getActivity());
 
         pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.fetch_details));
         pd.show();
-        new ApiHelper().getBanner( HomeFragment.this);
-        new ApiHelper().getDrinkCategory( HomeFragment.this);
+        new ApiHelper().getBanner(HomeFragment.this);
+        new ApiHelper().getDrinkCategory(HomeFragment.this);
 
     }
 
     @Override
     public void onClick(View view) {
-        if (view==ivLogOut){
-            DialogUtil.LogoutDialog(getActivity(),tinyDB);
-        }else if (view==llMain){
+        if (view == llMain) {
             CommonUtil.hideKeyboard(getActivity());
         }
     }
@@ -148,44 +136,43 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
     @Override
     public void onSuccess(Response<JsonElement> response, String typeApi) {
         dismissDialog();
-        if(typeApi.equalsIgnoreCase("Banner")) {
+        if (typeApi.equalsIgnoreCase("Banner")) {
             BannerResponse bannerResponse = new Gson().fromJson(response.body(), BannerResponse.class);
-            if(bannerResponse != null) {
+            if (bannerResponse != null) {
                 if (!bannerResponse.getError()) {
-                    for (int i = 0; i <bannerResponse.getImages().getBanner().size() ; i++) {
+                    for (int i = 0; i < bannerResponse.getImages().getBanner().size(); i++) {
 
                         String strBannerPath = bannerResponse.getImages().getBanner().get(i);
-                        strBannerUrl=strBaseUrl+strBannerPath;
-                        Log.d(TAG, "onSuccess: "+strBannerUrl);
+                        strBannerUrl = strBaseUrl + strBannerPath;
+                        Log.d(TAG, "onSuccess: " + strBannerUrl);
 
-                        slideList.add(new Slide(i,strBannerUrl , 0));
+                        slideList.add(new Slide(i, strBannerUrl, 0));
                     }
 
                     /*Add Banner To the Slider*/
                     slider.addSlides(slideList);
 
                 } else {
-                    SnackBarUtil.showSnackBar(getActivity(),getResources().getString(R.string.error_try_again),llMain);
+                    SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
                 }
             } else {
-                SnackBarUtil.showSnackBar(getActivity(),getResources().getString(R.string.error_try_again),llMain);
+                SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
             }
-        }
-        else if(typeApi.equalsIgnoreCase("DrinkCategory")) {
+        } else if (typeApi.equalsIgnoreCase("DrinkCategory")) {
             DrinkCategoryResponse drinkCategoryResponse = new Gson().fromJson(response.body(), DrinkCategoryResponse.class);
-            if(drinkCategoryResponse != null) {
+            if (drinkCategoryResponse != null) {
                 if (!drinkCategoryResponse.getError()) {
 
                     strCategoryId = drinkCategoryResponse.getCategory().getResult().get(0).getId();
-                    Log.d(TAG, "productDetail:Before "+strCategoryId);
+                    Log.d(TAG, "productDetail:Before " + strCategoryId);
 
-                    for (int i = 0; i <drinkCategoryResponse.getCategory().getResult().size() ; i++) {
+                    for (int i = 0; i < drinkCategoryResponse.getCategory().getResult().size(); i++) {
 
 
                         DrinkCategoryModel drinkCategoryModel = new DrinkCategoryModel();
 
                         String strDrinkCatePath = drinkCategoryResponse.getCategory().getResult().get(i).getIcon();
-                        strDrinkCateUrl         = strBaseUrl+strDrinkCatePath;
+                        strDrinkCateUrl = strBaseUrl + strDrinkCatePath;
 
                         drinkCategoryModel.setStrId(drinkCategoryResponse.getCategory().getResult().get(i).getId());
                         drinkCategoryModel.setStrName(drinkCategoryResponse.getCategory().getResult().get(i).getName());
@@ -194,14 +181,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
                         drinkCategoryModelArrayList.add(drinkCategoryModel);
                     }
 
-                    rvDrinkCategory = new RvDrinkCategory(context,drinkCategoryModelArrayList,HomeFragment.this);
+                    rvDrinkCategory = new RvDrinkCategory(context, drinkCategoryModelArrayList, HomeFragment.this);
                     rViewDrink.setAdapter(rvDrinkCategory);
 
                 } else {
-                    SnackBarUtil.showSnackBar(getActivity(),drinkCategoryResponse.getMessage(),llMain);
+                    SnackBarUtil.showSnackBar(getActivity(), drinkCategoryResponse.getMessage(), llMain);
                 }
             } else {
-                SnackBarUtil.showSnackBar(getActivity(),getResources().getString(R.string.error_try_again),llMain);
+                SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
             }
         }
 
@@ -226,10 +213,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener,ApiRe
     }
 
 
+    public void productDetail(String strCategId) {
 
-    public void productDetail(String strCategId){
-
-        Log.d(TAG, "productDetail:After "+strCategId);
+        Log.d(TAG, "productDetail:After " + strCategId);
 
 
     }

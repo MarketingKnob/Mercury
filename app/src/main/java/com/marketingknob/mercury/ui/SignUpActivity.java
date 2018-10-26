@@ -324,8 +324,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Log.d(TAG, "onSuccess: Phone"+otpResponse.getUser().getPhone()+" Name"+otpResponse.getUser().getName()
                     +" Email"+otpResponse.getUser().getEmail());
 
-                    tinyDB.putString("LoginUser",otpResponse.getUser().getPhone());
-                    Log.d(TAG, "onSuccess: TinyDB"+tinyDB.getString("LoginUser"));
+                    tinyDB.putString("LoginMobile",otpResponse.getUser().getPhone());
+                    tinyDB.putString("LoginUserName",otpResponse.getUser().getName());
+                    tinyDB.putString("LoginEmail",otpResponse.getUser().getEmail());
+                    Log.d(TAG, "onSuccess: TinyDB"+tinyDB.getString("LoginMobile"));
 
                     CommonUtil.hideKeyboard(SignUpActivity.this);
                     Animatoo.animateInAndOut(SignUpActivity.this);

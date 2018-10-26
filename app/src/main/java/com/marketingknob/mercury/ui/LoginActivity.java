@@ -168,7 +168,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     +" Phone"+loginResponse.getUser().getPhone());
                     Toast.makeText(context, ""+loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    tinyDB.putString("LoginUser",loginResponse.getUser().getPhone());
+                    tinyDB.putString("LoginMobile",loginResponse.getUser().getPhone());
+                    tinyDB.putString("LoginUserName",loginResponse.getUser().getName());
+                    tinyDB.putString("LoginEmail",loginResponse.getUser().getEmail());
 
                     SnackBarUtil.showSnackBar(LoginActivity.this,loginResponse.getMessage(),llTop);
                     CommonUtil.hideKeyboard(LoginActivity.this);

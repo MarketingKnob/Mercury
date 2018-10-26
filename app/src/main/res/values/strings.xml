@@ -79,4 +79,11 @@
     <string name="filter">Filter</string>
     <string name="search">Search Products</string>
 
+    <!--Notification Screen-->
+    <string name="read">Read</string>
+    <string name="unread">Unread</string>
+
+    <!--Profile Screen-->
+    <string name="save">Save</string>
+
 </resources>
