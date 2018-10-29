@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/black_gradient"
+    android:orientation="vertical"
+    tools:context=".ui.AboutDeveloperActivity">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="@dimen/pad_100dp"
+        android:layout_height="@dimen/pad_100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/pad_38dp"
+        android:src="@drawable/mknob_logo" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/pad_10dp"
+        android:layout_marginTop="@dimen/pad_15dp"
+        android:layout_marginEnd="@dimen/pad_10dp"
+        android:text="We are a global custom software development company focusing on the agile methodology for continuous delivery of our work. "
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_normal"
+        android:gravity="center"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/pad_24dp"
+        android:text="@string/get_touch"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_xxlarge"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/pad_24dp"
+        android:text="+91-1234567890"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_normal" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="hi@marketingknob.com"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_normal" />
+
+</android.support.v7.widget.LinearLayoutCompat>

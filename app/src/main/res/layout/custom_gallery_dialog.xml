@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical" >
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/pad_48dp"
+        android:layout_marginStart="@dimen/pad_30dp"
+        android:layout_marginEnd="@dimen/pad_30dp"
+        android:text="@string/dialog_title"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_large"/>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/pad_30dp"
+        android:layout_marginTop="@dimen/pad_24dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_camera"
+            android:layout_width="@dimen/pad_100dp"
+            android:layout_height="@dimen/pad_30dp"
+            android:background="@drawable/white_background"
+            android:textColor="@color/black"
+            android:text="@string/camera"
+            android:textAllCaps="false"
+            android:textSize="@dimen/font_normal"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_gallery"
+            android:layout_width="@dimen/pad_100dp"
+            android:layout_height="@dimen/pad_30dp"
+            android:layout_marginStart="@dimen/pad_20dp"
+            android:background="@drawable/white_background"
+            android:textColor="@color/black"
+            android:text="@string/gallery"
+            android:textAllCaps="false"
+            android:textSize="@dimen/font_normal"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+</android.support.v7.widget.LinearLayoutCompat>
