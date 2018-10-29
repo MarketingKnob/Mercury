@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.marketingknob.mercury.ui.fragments.MoreFragment"
-    android:background="@drawable/black_gradient">
+    android:background="@drawable/black_gradient"
+    android:orientation="vertical"
+    tools:context="com.marketingknob.mercury.ui.fragments.MoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rl_about_developer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Third Fragment"
-        android:gravity="center"
-        android:textColor="@color/white"/>
+        android:layout_height="@dimen/pad_48dp">
 
-</FrameLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/pad_20dp"
+            android:text="@string/about_developer"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_normal" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/pad_20dp"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginStart="@dimen/pad_20dp"
+        android:layout_marginEnd="@dimen/pad_20dp"
+        android:background="@color/white" />
+
+</android.support.v7.widget.LinearLayoutCompat>

@@ -86,4 +86,16 @@
     <!--Profile Screen-->
     <string name="save">Save</string>
 
+
+    <!--About Developer-->
+    <string name="about_developer">About Developer</string>
+
+    <string name="get_touch">Get In Touch</string>
+
+
+    <!--Camera Dialog-->
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="dialog_title">Choose profile image from...</string>
+
 </resources>

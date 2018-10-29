@@ -2,10 +2,9 @@ package com.marketingknob.mercury.util;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -20,7 +19,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.marketingknob.mercury.R;
@@ -31,7 +33,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Created by Akshya on 22-10-2018.
+ * Created by Rohit on 31-03-2018.
  */
 
 public class MediaUtils {
@@ -47,43 +49,84 @@ public class MediaUtils {
 
     private final String TAG = MediaUtils.class.getSimpleName();
 
+
     public MediaUtils(Activity activity) {
         mActivity = activity;
         mGetImg = (GetImg) activity;
     }
 
     public MediaUtils(android.support.v4.app.Fragment fragment) {
-        mActivity   = fragment.getActivity();
-        mFragment   = fragment;
-        mGetImg     = (GetImg) fragment;
+        mActivity = fragment.getActivity();
+        mFragment = fragment;
+        mGetImg = (GetImg) fragment;
     }
 
+//    public void openImageDialog() {
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mActivity, R.style.MyAlertDialogStyle);
+//        alertDialogBuilder.setTitle(R.string.select_source).setItems(R.array.source_array, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                if (which == 0) {
+//                    // camera
+//                    if (Build.VERSION.SDK_INT > 23) {
+//                        // check Permission
+//                        checkPermission(REQ_CAMERA);
+//                    } else {
+//                        openCamera();
+//                    }
+//
+//                } else {
+//                    // gallery
+//                    if (Build.VERSION.SDK_INT > 23) {
+//                        // check Permission
+//                        checkPermission(REQ_GALLERY);
+//                    } else {
+//                        openGallery();
+//                    }
+//                }
+//            }
+//        });
+//        alertDialogBuilder.create().show();
+//    }
     public void openImageDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mActivity);
-        alertDialogBuilder.setTitle(R.string.select_source).setItems(R.array.source_array, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
-                    // camera
-                    if (Build.VERSION.SDK_INT > 23) {
-                        // check Permission
-                        checkPermission(REQ_CAMERA);
-                    } else {
-                        openCamera();
-                    }
 
+        final Dialog dialog = new Dialog(mActivity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_gallery_dialog);
+
+        AppCompatButton btnCamera   = (AppCompatButton) dialog.findViewById(R.id.btn_camera);
+        AppCompatButton btnGallery  = (AppCompatButton) dialog.findViewById(R.id.btn_gallery);
+
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT > 23) {
+                    // check Permission
+                    checkPermission(REQ_CAMERA);
+                    dialog.dismiss();
                 } else {
-                    // gallery
-                    if (Build.VERSION.SDK_INT > 23) {
-                        // check Permission
-                        checkPermission(REQ_GALLERY);
-                    } else {
-                        openGallery();
-                    }
+                    openCamera();
+                    dialog.dismiss();
                 }
             }
         });
-        alertDialogBuilder.create().show();
+
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT > 23) {
+                    // check Permission
+                    checkPermission(REQ_GALLERY);
+                    dialog.dismiss();
+                } else {
+                    openGallery();
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        dialog.show();
     }
 
     private void openGallery() {
@@ -128,7 +171,10 @@ public class MediaUtils {
                 openGallery();
             }
         }
+
+
     }
+
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -253,8 +299,8 @@ public class MediaUtils {
         return imageFile.getPath();
     }
 
-    interface GetImg {
-        public void imgdata(String imgPath);
+   public interface GetImg {
+         void imgdata(String imgPath);
     }
 
 }
