@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ccp.setClickable(false);
 //        etPhone.addTextChangedListener(new MyTextWatcher(etPhone));
         CommonUtil.hideKeyboard(LoginActivity.this);
-
     }
 
     @Override
@@ -185,7 +184,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 DialogUtil.showDialogMsg(LoginActivity.this, "Error", getResources().getString(R.string.error_try_again));
             }
         }
-
     }
 
     @Override
@@ -204,7 +202,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void onBackPressed() {

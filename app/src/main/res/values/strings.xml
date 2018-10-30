@@ -77,7 +77,7 @@
     <string name="products">Products</string>
     <string name="popular">Popular</string>
     <string name="filter">Filter</string>
-    <string name="search">Search Products</string>
+    <string name="search">Search</string>
 
     <!--Notification Screen-->
     <string name="read">Read</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_main"
@@ -14,21 +15,46 @@
         android:background="@color/black"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/search_view"
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/ll_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/pad_48dp"
             android:layout_marginTop="@dimen/pad_15dp"
             android:layout_marginEnd="@dimen/pad_30dp"
-            android:layout_marginBottom="@dimen/pad_10dp"
+            android:layout_marginBottom="@dimen/pad_15dp"
             android:layout_toLeftOf="@+id/iv_logout"
-            android:background="@drawable/search_back"
-            android:focusable="false"
-            android:theme="@style/AppSearchView"
-            app:defaultQueryHint="@string/search"
-            app:iconifiedByDefault="false"
-            app:searchIcon="@null" />
+            android:background="@drawable/search_back">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:textAllCaps="true"
+                android:textSize="@dimen/font_normal"
+                android:textColor="@color/red"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/pad_10dp"
+                android:textStyle="bold"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <!--<android.support.v7.widget.SearchView-->
+            <!--android:id="@+id/search_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginStart="@dimen/pad_48dp"-->
+            <!--android:layout_marginTop="@dimen/pad_15dp"-->
+            <!--android:layout_marginEnd="@dimen/pad_30dp"-->
+            <!--android:layout_marginBottom="@dimen/pad_10dp"-->
+            <!--android:layout_toLeftOf="@+id/iv_logout"-->
+            <!--android:background="@drawable/search_back"-->
+            <!--android:focusable="false"-->
+            <!--android:theme="@style/AppSearchView"-->
+            <!--app:defaultQueryHint="@string/search"-->
+            <!--app:iconifiedByDefault="false"-->
+            <!--app:searchIcon="@null" />-->
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_logout"
@@ -69,5 +95,4 @@
 
         </RelativeLayout>
     </RelativeLayout>
-
 </android.support.v7.widget.LinearLayoutCompat>

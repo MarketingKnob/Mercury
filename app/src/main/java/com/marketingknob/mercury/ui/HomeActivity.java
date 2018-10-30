@@ -14,8 +14,6 @@ import android.support.v7.widget.SearchView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.ui.fragments.NotificationFragment;
@@ -39,7 +37,6 @@ public class HomeActivity extends AppCompatActivity {
     NotificationFragment notificationFragment;
     AccountFragment accountFragment;
     MoreFragment MoreFragment;
-    SearchView searchView;
     Fragment currentFragment = null;
     FragmentTransaction ft;
     BottomNavigationView bottomNavigationView;
@@ -53,15 +50,15 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_new);
+        setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
         findViewById();
         setupTabLayout();
 
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.red));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.red));
+//        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+//        searchEditText.setTextColor(getResources().getColor(R.color.red));
+//        searchEditText.setHintTextColor(getResources().getColor(R.color.red));
 
         ft = getSupportFragmentManager().beginTransaction();
         currentFragment = homeFragment;
@@ -160,9 +157,7 @@ public class HomeActivity extends AppCompatActivity {
     private void findViewById(){
 
         tinyDB                  = new TinyDB(this);
-        searchView              = findViewById(R.id.search_view);
         bottomNavigationView    = (BottomNavigationView) findViewById(R.id.bottomNavigationView_broker);
-
 //        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
     }
 }

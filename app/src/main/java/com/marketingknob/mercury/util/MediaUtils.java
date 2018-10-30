@@ -61,33 +61,6 @@ public class MediaUtils {
         mGetImg = (GetImg) fragment;
     }
 
-//    public void openImageDialog() {
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mActivity, R.style.MyAlertDialogStyle);
-//        alertDialogBuilder.setTitle(R.string.select_source).setItems(R.array.source_array, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                if (which == 0) {
-//                    // camera
-//                    if (Build.VERSION.SDK_INT > 23) {
-//                        // check Permission
-//                        checkPermission(REQ_CAMERA);
-//                    } else {
-//                        openCamera();
-//                    }
-//
-//                } else {
-//                    // gallery
-//                    if (Build.VERSION.SDK_INT > 23) {
-//                        // check Permission
-//                        checkPermission(REQ_GALLERY);
-//                    } else {
-//                        openGallery();
-//                    }
-//                }
-//            }
-//        });
-//        alertDialogBuilder.create().show();
-//    }
     public void openImageDialog() {
 
         final Dialog dialog = new Dialog(mActivity);
