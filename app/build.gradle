@@ -21,6 +21,10 @@ ext {
     playServicesVersion = "16.0.0"
 }
 
+configurations {
+    cleanedAnnotations
+    compile.exclude group: 'org.jetbrains' , module:'annotations'
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -86,5 +90,8 @@ dependencies {
 
     /*Picaso Library For Image Download*/
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    /*StickySwitch*/
+    implementation 'com.github.GwonHyeok:StickySwitch:0.0.15'
 
 }

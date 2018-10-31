@@ -39,7 +39,6 @@
 
         </android.support.v7.widget.LinearLayoutCompat>
 
-
         <!--<android.support.v7.widget.SearchView-->
             <!--android:id="@+id/search_view"-->
             <!--android:layout_width="match_parent"-->
@@ -92,7 +91,6 @@
                 app:itemIconTint="@color/white"
                 app:itemTextColor="@color/white"
                 app:menu="@menu/bottom_navigation_menu" />
-
         </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.LinearLayoutCompat>

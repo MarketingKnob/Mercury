@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    android:id="@+id/ll_top"
     tools:context="com.marketingknob.mercury.ui.LoginActivity">
 
     <ScrollView
@@ -31,7 +32,7 @@
                     android:layout_width="@dimen/pad_80dp"
                     android:layout_height="@dimen/pad_80dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/pad_80dp"
+                    android:layout_marginTop="@dimen/pad_60dp"
                     android:src="@drawable/app_logo"
                     android:text="@string/app_name"
                     android:textAllCaps="false"
@@ -42,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/pad_24dp"
-                    android:layout_marginTop="@dimen/pad_60dp"
+                    android:layout_marginTop="@dimen/pad_30dp"
                     android:layout_marginEnd="@dimen/pad_24dp"
                     android:layout_marginBottom="@dimen/pad_10dp"
                     android:orientation="vertical">
@@ -52,14 +53,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="false"
+                        android:focusable="false"
                         android:padding="@dimen/pad_5dp"
                         app:ccp_clickable="false"
+                        app:ccp_defaultNameCode="in"
                         app:ccp_setCountryByTimeZone="true"
                         app:ccp_showFullName="false"
                         app:ccp_textColor="@color/white"
-                        app:ccp_textSize="@dimen/font_normal"
-                        app:ccp_defaultNameCode="in"
-                        android:focusable="false"/>
+                        app:ccp_textSize="@dimen/font_normal" />
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/input_layout_phone"
@@ -75,12 +76,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:cursorVisible="true"
                             android:hint="@string/mobile"
                             android:inputType="number"
                             android:maxLines="1"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_large"
-                            android:cursorVisible="true"/>
+                            android:textSize="@dimen/font_large" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -143,6 +144,26 @@
                         android:layout_height="1dip"
                         android:background="@color/white" />
 
+                    <io.ghyeok.stickyswitch.widget.StickySwitch
+                        android:id="@+id/sticky_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/pad_100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/pad_20dp"
+                        app:ss_animationDuration="500"
+                        app:ss_animationType="curved"
+                        app:ss_iconPadding="@dimen/pad_15dp"
+                        app:ss_iconSize="@dimen/pad_30dp"
+                        app:ss_leftIcon="@drawable/user_one"
+                        app:ss_leftText="Male"
+                        app:ss_rightIcon="@drawable/user_three"
+                        app:ss_rightText="Female"
+                        app:ss_selectedTextSize="@dimen/font_large"
+                        app:ss_sliderBackgroundColor="@color/colorPrimaryDark"
+                        app:ss_switchColor="@color/colorPrimary"
+                        app:ss_textColor="@color/white"
+                        app:ss_textSize="@dimen/font_normal" />
+
                 </android.support.v7.widget.LinearLayoutCompat>
 
                 <android.support.v7.widget.AppCompatButton
@@ -150,7 +171,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/pad_48dp"
                     android:layout_marginStart="@dimen/pad_38dp"
-                    android:layout_marginTop="@dimen/pad_24dp"
                     android:layout_marginEnd="@dimen/pad_38dp"
                     android:layout_marginBottom="@dimen/pad_5dp"
                     android:background="@drawable/btn_selector"
@@ -186,14 +206,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/pad_15dp"
+                    android:layout_marginTop="@dimen/pad_38dp"
                     android:layout_marginEnd="@dimen/pad_15dp"
+                    android:gravity="center"
                     android:text="@string/verfication_code"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_xlarge"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/pad_38dp"
-                    android:gravity="center"/>
+                    android:textStyle="bold" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -201,11 +221,11 @@
                     android:layout_marginStart="@dimen/pad_15dp"
                     android:layout_marginTop="@dimen/pad_24dp"
                     android:layout_marginEnd="@dimen/pad_15dp"
+                    android:gravity="center"
                     android:text="@string/otp_message"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_large"
-                    android:gravity="center"/>
+                    android:textSize="@dimen/font_large" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_number"
@@ -213,25 +233,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/pad_15dp"
                     android:layout_marginEnd="@dimen/pad_15dp"
+                    android:gravity="center"
                     android:text="1234567890"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_xlarge"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textStyle="bold" />
 
                 <com.goodiebag.pinview.Pinview
                     android:id="@+id/pinview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:pinWidth="@dimen/pad_30dp"
-                    app:pinHeight="@dimen/pad_30dp"
-                    app:pinLength="5"
                     app:cursorVisible="true"
                     app:forceKeyboard="true"
                     app:hint="0"
                     app:inputType="number"
-                    app:pinBackground="@color/white" />
+                    app:pinBackground="@color/white"
+                    app:pinHeight="@dimen/pad_30dp"
+                    app:pinLength="5"
+                    app:pinWidth="@dimen/pad_30dp" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_timer"
@@ -239,13 +259,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/pad_15dp"
                     android:layout_marginEnd="@dimen/pad_15dp"
+                    android:gravity="center"
                     android:text="timer"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_xlarge"
                     android:textStyle="bold"
-                    android:gravity="center"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_otp"
@@ -274,7 +294,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_xlarge"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.LinearLayoutCompat>

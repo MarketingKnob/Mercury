@@ -35,9 +35,12 @@ import com.rilixtech.CountryCodePicker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.ghyeok.stickyswitch.widget.StickySwitch;
 import retrofit2.Response;
 
 import android.os.CountDownTimer;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -66,8 +69,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.btn_resend_otp)      AppCompatButton btnResendOtp;
     @BindView(R.id.ccp)                 CountryCodePicker countryCodePicker;
     @BindView(R.id.pinview)             Pinview pinview;
+    @BindView(R.id.sticky_switch)       StickySwitch stickySwitch;
 
-    public String strEmail ="", strUsername ="", strPhone ="", strDeviceId ="",strOtp="",strUserId="";
+    public String strEmail ="", strUsername ="", strPhone ="", strDeviceId ="",strOtp="",strUserId="",strGender="Male";
     public int counter;
     private static final String TAG = "SignUpActivity";
     ProgressDialog pd;
@@ -96,6 +100,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 strOtp=otp;
                 Log.d(TAG, "messageReceived:"+strOtp+" In integer"+Integer.valueOf(strOtp.trim()));
                 pinview.setValue(otp);
+            }
+        });
+
+        stickySwitch.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
+            @Override
+            public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
+                strGender=text.trim();
+                Log.d(TAG, "Now Selected : " + direction.name() + ", Current Text : " + text);
             }
         });
     }
