@@ -22,7 +22,6 @@ import java.util.ArrayList;
 /**
  * Created by Akshya on 23/10/2018.
  */
-
 public class RvDrinkCategory extends RecyclerView.Adapter<RvDrinkCategory.MyViewHolder> {
 
     private Context context;
@@ -45,10 +44,8 @@ public class RvDrinkCategory extends RecyclerView.Adapter<RvDrinkCategory.MyView
 
             ivDrink     = view.findViewById(R.id.iv_drink_icon);
             tvDrink     = view.findViewById(R.id.tv_drink_name);
-
         }
     }
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -60,12 +57,10 @@ public class RvDrinkCategory extends RecyclerView.Adapter<RvDrinkCategory.MyView
         return new MyViewHolder(layoutView);
     }
 
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         holder.tvDrink.setText(drinkCategoryModelArrayList.get(position).getStrName());
-
         Picasso.get()
                 .load(drinkCategoryModelArrayList.get(position).getStrIcon())
                 .placeholder(R.drawable.wine_colord)

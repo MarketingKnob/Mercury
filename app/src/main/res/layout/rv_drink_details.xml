@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white">
@@ -11,7 +13,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_drink"
             android:layout_width="@dimen/pad_70dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_margin="@dimen/pad_15dp"
             android:src="@drawable/bottal" />
 
@@ -19,30 +21,19 @@
             android:id="@+id/tv_drink_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="37dp"
+            android:layout_marginStart="117dp"
+            android:layout_marginTop="14dp"
             android:text="Debum Lorem"
             android:textColor="@color/red"
             android:textSize="@dimen/font_large" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_drink_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_drink_name"
-            android:layout_alignStart="@+id/tv_drink_name"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="4dp"
-            android:text="Sed Debute Ipum Follow"
-            android:textColor="@color/red"
-            android:textSize="@dimen/font_small" />
-
-        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_drink_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_drink_desc"
+            android:layout_below="@+id/tv_drink_name"
             android:layout_alignStart="@+id/tv_drink_name"
             android:layout_centerVertical="true"
             android:layout_marginTop="4dp"
@@ -50,25 +41,45 @@
             android:textColor="@color/red"
             android:textSize="@dimen/font_small" />
 
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="100dp"
-            android:layout_height="35dp"
+        <com.willy.ratingbar.BaseRatingBar
+            android:id="@+id/simpleRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tv_drink_price"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
+            android:layout_alignStart="@+id/tv_drink_name"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="@dimen/pad_5dp"
+            app:srb_clearRatingEnabled="true"
+            app:srb_clickable="false"
+            app:srb_drawableEmpty="@drawable/star_unfill"
+            app:srb_drawableFilled="@drawable/star_fill"
+            app:srb_isIndicator="true"
+            app:srb_numStars="5"
+            app:srb_scrollable="true"
+            app:srb_starHeight="@dimen/pad_20dp"
+            app:srb_starPadding="@dimen/pad_5dp"
+            app:srb_starWidth="@dimen/pad_20dp"
+            app:srb_stepSize="1" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="@dimen/pad_100dp"
+            android:layout_height="@dimen/pad_30dp"
+            android:layout_below="@+id/simpleRatingBar"
+            android:layout_alignStart="@+id/simpleRatingBar"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/addtocart"
             android:text="ADD TO CART"
             android:textColor="@color/white"
             android:textSize="@dimen/font_small" />
 
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="@dimen/pad_48dp"
-            android:layout_height="@dimen/pad_48dp"
-            android:layout_alignTop="@+id/tv_drink_name"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="25dp"
-            android:src="@drawable/plus" />
+        <!--<android.support.v7.widget.AppCompatImageView-->
+        <!--android:layout_width="@dimen/pad_48dp"-->
+        <!--android:layout_height="@dimen/pad_48dp"-->
+        <!--android:layout_alignTop="@+id/tv_drink_name"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginEnd="25dp"-->
+        <!--android:src="@drawable/plus" />-->
 
     </RelativeLayout>
-
 </android.support.v7.widget.LinearLayoutCompat>

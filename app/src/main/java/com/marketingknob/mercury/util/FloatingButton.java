@@ -18,7 +18,6 @@ public class FloatingButton {
     public static FloatingActionButton leftCenterButton;
     public static FloatingActionMenu rightLowerMenu;
 
-
     public static void floatingWorking(final Context context, Activity activity) {
         int floatButtonLayoutSize = context.getResources().getDimensionPixelSize(R.dimen.float_btn_layout_dimension);
         int floatButtonLayoutMargin = context.getResources().getDimensionPixelOffset(R.dimen.pad_48dp);

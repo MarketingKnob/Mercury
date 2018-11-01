@@ -38,4 +38,10 @@ public interface WebApi {
     @GET(WebConstants.GET_CATEGORY)
     Call<JsonElement> getDrinkCategory();
 
+    /*All Products By Category*/
+    @FormUrlEncoded
+    @POST(WebConstants.GET_PRODUCTS)
+    Call<JsonElement> getCatProduct(@Field("cat_id") String cat_id);
+
+
 }

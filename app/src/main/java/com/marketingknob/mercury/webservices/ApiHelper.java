@@ -111,4 +111,23 @@ public class ApiHelper {
         });
     }
 
+    /*Get All Product Category Wise*/
+    public void getCatProducts(final ApiResponseHelper apiResponseHelper,String strCateId) {
+
+        this.apiResponseHelper = apiResponseHelper;
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).getCatProduct(strCateId);
+
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                apiResponseHelper.onSuccess(response, "CategoryProducts");
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                apiResponseHelper.onFailure(t.getMessage());
+            }
+        });
+    }
+
 }

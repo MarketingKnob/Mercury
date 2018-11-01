@@ -79,7 +79,6 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
         if (!strEmail.equals(""))
         etEmail.setText(strEmail);
 
-
         // initialize MediaUtils
         mMediaUtils = new MediaUtils(this);
 

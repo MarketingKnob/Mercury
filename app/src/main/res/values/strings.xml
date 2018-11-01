@@ -27,6 +27,7 @@
     <string name="text_loading">Loading…</string>
     <string name="text_update">Update</string>
     <string name="fetch_details">Fetching Data...</string>
+    <string name="product_details">Fetching Product Details...</string>
 
     <!--Login Screen-->
 
@@ -78,6 +79,7 @@
     <string name="popular">Popular</string>
     <string name="filter">Filter</string>
     <string name="search">Search</string>
+    <string name="price">Price</string>
 
     <!--Notification Screen-->
     <string name="read">Read</string>
