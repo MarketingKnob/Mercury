@@ -28,7 +28,7 @@ public interface WebApi {
     /*Verify OTP*/
     @FormUrlEncoded
     @POST(WebConstants.VERIFY_OTP)
-    Call<JsonElement> verifyOtp(@Field("otp") String otp,@Field("user_id") String userid);
+    Call<JsonElement> verifyOtp(@Field("otp") String otp,@Field("userid") String userid);
 
     /*Banner*/
     @GET(WebConstants.GET_BANNER)
@@ -46,7 +46,7 @@ public interface WebApi {
     /*Logout User*/
     @FormUrlEncoded
     @POST(WebConstants.LOGOUT_USER)
-    Call<JsonElement> logout_user(@Field("phone") String phone);
+    Call<JsonElement> logout_user(@Field("userid") String phone);
 
 
 }

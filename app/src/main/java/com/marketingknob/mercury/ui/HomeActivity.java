@@ -14,11 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -29,14 +27,12 @@ import com.marketingknob.mercury.ui.fragments.NotificationFragment;
 import com.marketingknob.mercury.ui.fragments.HomeFragment;
 import com.marketingknob.mercury.ui.fragments.AccountFragment;
 import com.marketingknob.mercury.ui.fragments.MoreFragment;
-import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
 import com.marketingknob.mercury.util.ProgressDialogUtil;
 import com.marketingknob.mercury.util.SnackBarUtil;
 import com.marketingknob.mercury.util.TinyDB;
 import com.marketingknob.mercury.webservices.ApiHelper;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
-import com.marketingknob.mercury.webservices.webresponse.LoginResponse;
 import com.marketingknob.mercury.webservices.webresponse.LogoutResponse;
 
 import butterknife.BindView;
@@ -60,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
     boolean doubleBackToExitPressedOnce = false;
     TinyDB tinyDB;
     ProgressDialog pd;
-    String strPhone="";
+    String strUserId ="";
     private static final String TAG = "HomeActivity";
 
     @BindView(R.id.ll_main)     LinearLayoutCompat llMain;
@@ -181,7 +177,7 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
         bottomNavigationView    = (BottomNavigationView) findViewById(R.id.bottomNavigationView_broker);
 //        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
-        strPhone                = tinyDB.getString("LoginMobile");
+        strUserId = tinyDB.getString("LoginId");
 
     }
 
@@ -232,12 +228,12 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.d(TAG, "onClick: "+strPhone);
+                Log.d(TAG, "onClick: "+ strUserId);
 
-                if (!strPhone.equalsIgnoreCase("")){
+                if (!strUserId.equalsIgnoreCase("")){
                     pd = ProgressDialogUtil.getProgressDialogMsg(HomeActivity.this, getResources().getString(R.string.loading_wait));
                     pd.show();
-                    new ApiHelper().logout(HomeActivity.this,strPhone);
+                    new ApiHelper().logout(HomeActivity.this, strUserId);
                 }
 
             }

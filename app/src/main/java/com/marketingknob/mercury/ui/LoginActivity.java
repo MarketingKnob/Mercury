@@ -131,7 +131,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
-
     private class MyTextWatcher implements TextWatcher {
 
         private View view;
