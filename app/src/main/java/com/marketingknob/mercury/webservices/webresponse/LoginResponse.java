@@ -65,6 +65,23 @@ public class LoginResponse {
         @SerializedName("phone")
         @Expose
         private String phone;
+        @SerializedName("login_status")
+        @Expose
+        private Boolean loginStatus;
+        @SerializedName("gender")
+        @Expose
+        private String gender;
+        @SerializedName("userid")
+        @Expose
+        private String userid;
+
+        public String getUserid() {
+            return userid;
+        }
+
+        public void setUserid(String userid) {
+            this.userid = userid;
+        }
 
         public String getName() {
             return name;
@@ -88,6 +105,22 @@ public class LoginResponse {
 
         public void setPhone(String phone) {
             this.phone = phone;
+        }
+
+        public Boolean getLoginStatus() {
+            return loginStatus;
+        }
+
+        public void setLoginStatus(Boolean loginStatus) {
+            this.loginStatus = loginStatus;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
         }
 
     }

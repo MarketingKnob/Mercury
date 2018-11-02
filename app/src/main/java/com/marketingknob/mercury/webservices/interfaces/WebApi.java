@@ -19,11 +19,11 @@ public interface WebApi {
     @FormUrlEncoded
     @POST(WebConstants.SIGNUP_USER_URL)
     Call<JsonElement> signUpUser(@Field("name") String name, @Field("phone") String phone, @Field("device_id") String device_id,
-                                 @Field("device_type") String device_type, @Field("email") String email);
+                                 @Field("device_type") String device_type, @Field("email") String email, @Field("gender") String gender);
     /*LogIn*/
     @FormUrlEncoded
     @POST(WebConstants.LOGIN_URL)
-    Call<JsonElement> login(@Field("phone") String phone);
+    Call<JsonElement> login_user(@Field("phone") String phone);
 
     /*Verify OTP*/
     @FormUrlEncoded
@@ -42,6 +42,11 @@ public interface WebApi {
     @FormUrlEncoded
     @POST(WebConstants.GET_PRODUCTS)
     Call<JsonElement> getCatProduct(@Field("cat_id") String cat_id);
+
+    /*Logout User*/
+    @FormUrlEncoded
+    @POST(WebConstants.LOGOUT_USER)
+    Call<JsonElement> logout_user(@Field("phone") String phone);
 
 
 }

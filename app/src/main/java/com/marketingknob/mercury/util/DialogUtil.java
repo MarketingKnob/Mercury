@@ -80,40 +80,7 @@ public class DialogUtil {
         alertDialog.show();
     }
 
-    /**
-     * Logout Alert
-     */
-    public static void LogoutDialog(final Activity context, final TinyDB tinyDB){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
 
-//                         Dialog with custom theme
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
-        builder.setTitle(context.getResources().getText(R.string.logout));
-        builder.setMessage(context.getResources().getText(R.string.logout_really));
-        //Yes Button
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                tinyDB.clear();
-                Animatoo.animateFade(context);
-                Intent intent= new Intent(context,LoginActivity.class);
-                context.startActivity(intent);
-                context.startActivity(new Intent(context, LoginActivity.class));
-                context.finish();
-            }
-        });
-
-        //No Button
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
 
     /**
      * @param context

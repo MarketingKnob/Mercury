@@ -39,6 +39,7 @@ import io.ghyeok.stickyswitch.widget.StickySwitch;
 import retrofit2.Response;
 
 import android.os.CountDownTimer;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -260,7 +261,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onPermissionGranted() {
                 pd = ProgressDialogUtil.getProgressDialogMsg(SignUpActivity.this, getResources().getString(R.string.create_account));
                 pd.show();
-                new ApiHelper().signUpUser(strUsername,strPhone,strDeviceId,strEmail,SignUpActivity.this);
+                new ApiHelper().signUpUser(strUsername,strPhone,strDeviceId,strEmail,strGender,SignUpActivity.this);
 
             }
 
@@ -331,14 +332,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             OtpResponse otpResponse = new Gson().fromJson(response.body(), OtpResponse.class);
             if(otpResponse != null) {
                 if (!otpResponse.getError()) {
-                    SnackBarUtil.showSnackBar(SignUpActivity.this,otpResponse.getMessage(),llTop);
+
+                    Toast.makeText(this, ""+otpResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                     Log.d(TAG, "onSuccess: Phone"+otpResponse.getUser().getPhone()+" Name"+otpResponse.getUser().getName()
-                    +" Email"+otpResponse.getUser().getEmail());
+                    +" Email"+otpResponse.getUser().getEmail()+"Gender"+otpResponse.getUser().getGender()+"LoginStatus"+
+                            otpResponse.getUser().getLoginStatus()+"LoginId"+ otpResponse.getUser().getUserid());
 
                     tinyDB.putString("LoginMobile",otpResponse.getUser().getPhone());
                     tinyDB.putString("LoginUserName",otpResponse.getUser().getName());
                     tinyDB.putString("LoginEmail",otpResponse.getUser().getEmail());
+                    tinyDB.putString("LoginGender",otpResponse.getUser().getGender());
+                    tinyDB.putBoolean("LoginStatus",otpResponse.getUser().getLoginStatus());
+                    tinyDB.putString("LoginId",otpResponse.getUser().getUserid().trim());
                     Log.d(TAG, "onSuccess: TinyDB"+tinyDB.getString("LoginMobile"));
 
                     CommonUtil.hideKeyboard(SignUpActivity.this);

@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
         tinyDB = new TinyDB(this);
         findViewById();
 
-        Log.d(TAG, "onCreate: "+tinyDB.getString("LoginMobile"));
+        Log.d(TAG, "onCreate: "+tinyDB.getBoolean("LoginStatus"));
 
     }
 

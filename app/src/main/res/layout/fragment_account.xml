@@ -79,7 +79,7 @@
                         android:gravity="center"
                         android:hint="@string/mobile"
                         android:inputType="number"
-                        android:paddingEnd="@dimen/pad_15dp"
+                        android:paddingRight="@dimen/pad_24dp"
                         android:textCursorDrawable="@drawable/white_cursor" />
 
                 </android.support.v7.widget.LinearLayoutCompat>

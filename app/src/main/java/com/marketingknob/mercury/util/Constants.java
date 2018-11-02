@@ -7,6 +7,6 @@ package com.marketingknob.mercury.util;
 public class Constants {
 
     public static final String BASE_URL           = "";
-    public static final String SIGNIN_URL         = BASE_URL+"login.php?";
+    public static final String SIGNIN_URL         = BASE_URL+"login_user.php?";
 
 }

@@ -1,6 +1,7 @@
 package com.marketingknob.mercury.ui.fragments;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,12 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.SupportMapFragment;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.marketingknob.mercury.R;
+import com.marketingknob.mercury.ui.ClubLocationActivity;
 import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.MediaUtils;
 import com.marketingknob.mercury.util.TinyDB;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,14 +98,34 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
         if (v==llMain){
             CommonUtil.hideKeyboard(activity);
         }else if (v== ivAddPhotos){
-            mMediaUtils.openImageDialog();
+            askPermission();
+
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        mMediaUtils.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    void askPermission(){
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                mMediaUtils.openImageDialog();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+
+            }
+        };
+
+        TedPermission.with(activity)
+                .setPermissionListener(permissionlistener)
+//                .setRationaleTitle("Runtime permission")
+//                .setRationaleMessage("If u use the services of app you need to Confirm Runtime Permission")
+                .setDeniedTitle("Permission denied")
+                .setDeniedMessage(
+                        "If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setGotoSettingButtonText("Go to setting")
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check();
     }
 
     @Override
@@ -117,5 +143,4 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
             CivProfileImage.setImageBitmap(myBitmap);
         }
     }
-
 }

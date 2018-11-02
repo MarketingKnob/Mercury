@@ -25,16 +25,12 @@ public class SmsReceiver extends BroadcastReceiver {
             //You must check here if the sender is your provider and not another one with same text.
 
             Log.d(TAG, "onReceive: "+sender);
-
-            if (sender.equalsIgnoreCase("BW-MRCURY")){
+//            if (sender.equalsIgnoreCase("MRCURY")){
                 String messageBody = smsMessage.getMessageBody();
-
                 //Pass on the text to our listener.
                 mListener.messageReceived(messageBody);
-            }
-
+//            }
         }
-
     }
 
     public static void bindListener(SmsListener listener) {

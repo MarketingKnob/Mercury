@@ -158,20 +158,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onSuccess(Response<JsonElement> response, String typeApi) {
         dismissDialog();
-        if(typeApi.equalsIgnoreCase("login")) {
+        if(typeApi.equalsIgnoreCase("login_user")) {
             LoginResponse loginResponse = new Gson().fromJson(response.body(), LoginResponse.class);
             if(loginResponse != null) {
                 if (!loginResponse.getError()) {
 
                     Log.d(TAG, "onSuccess: "+loginResponse.getUser().getPhone()+" Email"+loginResponse.getUser().getEmail()
-                    +" Phone"+loginResponse.getUser().getPhone());
+                    +" Phone"+loginResponse.getUser().getPhone()+"Gender"+loginResponse.getUser().getGender()+"LoginStatus"+
+                            loginResponse.getUser().getLoginStatus()+"LoginId"+ loginResponse.getUser().getUserid());
                     Toast.makeText(context, ""+loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                     tinyDB.putString("LoginMobile",loginResponse.getUser().getPhone());
                     tinyDB.putString("LoginUserName",loginResponse.getUser().getName());
                     tinyDB.putString("LoginEmail",loginResponse.getUser().getEmail());
+                    tinyDB.putString("LoginGender",loginResponse.getUser().getGender());
+                    tinyDB.putBoolean("LoginStatus",loginResponse.getUser().getLoginStatus());
+                    tinyDB.putString("LoginId",loginResponse.getUser().getUserid().trim());
 
-                    SnackBarUtil.showSnackBar(LoginActivity.this,loginResponse.getMessage(),llTop);
+                    Toast.makeText(this, ""+loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     CommonUtil.hideKeyboard(LoginActivity.this);
                     Animatoo.animateInAndOut(LoginActivity.this);
                     startActivity(new Intent(LoginActivity.this, ClubLocationActivity.class));

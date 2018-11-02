@@ -18,12 +18,12 @@ public class ApiHelper {
     public void login(String phone, final ApiResponseHelper apiResponseHelper) {
 
         this.apiResponseHelper = apiResponseHelper;
-        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).login(phone);
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).login_user(phone);
 
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                apiResponseHelper.onSuccess(response, "login");
+                apiResponseHelper.onSuccess(response, "login_user");
             }
 
             @Override
@@ -35,11 +35,11 @@ public class ApiHelper {
     }
 
     /*Sign Up User*/
-    public void signUpUser(String name,String phone,String deviceId,String email,
+    public void signUpUser(String name,String phone,String deviceId,String email,String gender,
                            final ApiResponseHelper apiResponseHelper) {
 
         this.apiResponseHelper = apiResponseHelper;
-        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).signUpUser(name,phone,deviceId,"android", email);
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).signUpUser(name,phone,deviceId,"android", email,gender);
 
         call.enqueue(new Callback<JsonElement>() {
             @Override
@@ -125,6 +125,26 @@ public class ApiHelper {
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
+                apiResponseHelper.onFailure(t.getMessage());
+            }
+        });
+    }
+
+    /*/LogOut User/*/
+    public void logout( final ApiResponseHelper apiResponseHelper,String phone) {
+
+        this.apiResponseHelper = apiResponseHelper;
+        Call<JsonElement> call = ApiClient.getClient().create(WebApi.class).logout_user(phone);
+
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                apiResponseHelper.onSuccess(response, "logout");
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Log.e("Login_Exp", "//" + t.getMessage());
                 apiResponseHelper.onFailure(t.getMessage());
             }
         });

@@ -28,6 +28,7 @@
     <string name="text_update">Update</string>
     <string name="fetch_details">Fetching Data...</string>
     <string name="product_details">Fetching Product Details...</string>
+    <string name="loading_wait">Loading Please wait...</string>
 
     <!--Login Screen-->
 
@@ -54,7 +55,6 @@
     <string name="otp_message">A One Time Password (OTP) has been sent to your mobile number.</string>
     <string name="otp_verify">Verifying OTP...</string>
     <string name="create_account">Creating Account...</string>
-
 
     <!--API key for Testing-->
     <string name="api_key">AIzaSyAmYWHUfPiGbB6Ph3Yas3JMkF1e99BJn6Q</string>

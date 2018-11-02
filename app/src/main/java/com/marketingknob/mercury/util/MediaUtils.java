@@ -74,28 +74,34 @@ public class MediaUtils {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT > 23) {
-                    // check Permission
-                    checkPermission(REQ_CAMERA);
-                    dialog.dismiss();
-                } else {
-                    openCamera();
-                    dialog.dismiss();
-                }
+
+                openCamera();
+                dialog.dismiss();
+
+//                if (Build.VERSION.SDK_INT > 23) {
+//                    // check Permission
+//                    checkPermission(REQ_CAMERA);
+//                    dialog.dismiss();
+//                } else {
+//                    openCamera();
+//                    dialog.dismiss();
+//                }
             }
         });
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT > 23) {
-                    // check Permission
-                    checkPermission(REQ_GALLERY);
-                    dialog.dismiss();
-                } else {
                     openGallery();
                     dialog.dismiss();
-                }
+//                if (Build.VERSION.SDK_INT > 23) {
+//                    // check Permission
+//                    checkPermission(REQ_GALLERY);
+//                    dialog.dismiss();
+//                } else {
+//                    openGallery();
+//                    dialog.dismiss();
+//                }
             }
         });
 
@@ -145,9 +151,7 @@ public class MediaUtils {
             }
         }
 
-
     }
-
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
