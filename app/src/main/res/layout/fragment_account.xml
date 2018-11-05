@@ -142,6 +142,7 @@
             </android.support.v7.widget.LinearLayoutCompat>
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_save"
                 android:layout_width="@dimen/pad_80dp"
                 android:layout_height="@dimen/pad_30dp"
                 android:layout_gravity="center"

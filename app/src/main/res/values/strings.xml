@@ -29,6 +29,7 @@
     <string name="fetch_details">Fetching Data...</string>
     <string name="product_details">Fetching Product Details...</string>
     <string name="loading_wait">Loading Please wait...</string>
+    <string name="profile_update">Updating Profile wait...</string>
 
     <!--Login Screen-->
 

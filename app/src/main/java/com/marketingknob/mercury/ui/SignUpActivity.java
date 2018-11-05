@@ -237,19 +237,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
      */
     private boolean validateEmail() {
         strEmail = etEmail.getText().toString().trim();
-        if (strEmail.equalsIgnoreCase("")) {
-            return true;
-        } else {
-            if (!CommonUtil.isValidEmail(strEmail)) {
-                DialogUtil.showDialogMsg(SignUpActivity.this, "Email Error",
-                        getResources().getString(R.string.err_msg_email));
-                return false;
-            } else {
-                inputLayoutEmail.setErrorEnabled(false);
-            }
 
+        if (!CommonUtil.isValidEmail(strEmail)) {
+            DialogUtil.showDialogMsg(SignUpActivity.this, "Email Error",
+                    getResources().getString(R.string.err_msg_email));
+            return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     /**
@@ -326,8 +321,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 DialogUtil.showDialogMsg(SignUpActivity.this, "Error", getResources().getString(R.string.error_try_again));
             }
         }
-
-        //For
+        //For Verify OTP
        else if(typeApi.equalsIgnoreCase("verifyOTP")) {
             OtpResponse otpResponse = new Gson().fromJson(response.body(), OtpResponse.class);
             if(otpResponse != null) {

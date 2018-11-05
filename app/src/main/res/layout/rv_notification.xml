@@ -17,14 +17,17 @@
             android:src="@drawable/account"
             app:civ_border_color="@color/white"
             app:civ_border_width="1dp"
+
             app:civ_circle_background_color="@color/white" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_read_unread"
             android:layout_width="@dimen/pad_60dp"
             android:layout_height="@dimen/pad_30dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/pad_10dp"
+            android:layout_marginEnd="2dp"
             android:background="@drawable/red_background"
             android:text="@string/read"
             android:textAllCaps="false"
@@ -35,12 +38,12 @@
             android:id="@+id/tv_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/pad_10dp"
-            android:layout_marginTop="@dimen/pad_5dp"
-            android:layout_marginEnd="1dp"
+            android:layout_marginStart="@dimen/pad_5dp"
+            android:layout_marginTop="@dimen/pad_15dp"
+            android:layout_marginEnd="8dp"
             android:layout_toStartOf="@+id/btn_read_unread"
             android:layout_toEndOf="@+id/profile_image"
-            android:text="Welcome on the Mercury MKnob first Notification."
+            android:text="Welcome on the Mercury MKnob "
             android:textColor="@color/white"
             android:textSize="@dimen/font_normal" />
 
