@@ -22,9 +22,9 @@
         android:layout_marginStart="@dimen/pad_10dp"
         android:layout_marginTop="@dimen/pad_15dp"
         android:layout_marginEnd="@dimen/pad_10dp"
-        android:text="We are a global custom software development company focusing on the agile methodology for continuous delivery of our work. "
+        android:text="@string/company_detail"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_normal"
+        android:textSize="@dimen/font_small"
         android:gravity="center"/>
 
     <android.support.v7.widget.AppCompatTextView
@@ -41,8 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/pad_24dp"
-        android:text="+91-1234567890"
+        android:layout_marginTop="@dimen/pad_15dp"
+        android:text="@string/company_phone"
         android:textColor="@color/white"
         android:textSize="@dimen/font_normal" />
 
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="hi@marketingknob.com"
+        android:text="@string/company_email"
         android:textColor="@color/white"
         android:textSize="@dimen/font_normal" />
 

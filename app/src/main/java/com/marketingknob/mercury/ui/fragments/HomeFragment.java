@@ -116,6 +116,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
         new ApiHelper().getBanner(HomeFragment.this);
         new ApiHelper().getDrinkCategory(HomeFragment.this);
 
+        rViewDetails.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
+                if (dy > 0 ||dy<0 && leftCenterButton.isShown())
+                {
+//                    leftCenterButton.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                {
+//                    leftCenterButton.setVisibility(View.VISIBLE);
+                }
+
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
 
     }
 
@@ -199,7 +220,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
                     for (int i = 0; i <productResponse.getProduct().getResult().size() ; i++) {
 
                         CatProductsModel catProductsModel = new CatProductsModel();
-
                         String strProductPath = productResponse.getProduct().getResult().get(i).getImage();
                         strCatProductUrl = strImageBaseUrl + strProductPath;
 
@@ -242,7 +262,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     }
 
     public void productDetail(String strCategId) {
-
         Log.d(TAG, "productDetail:After " + strCategId);
         pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.product_details));
         pd.show();

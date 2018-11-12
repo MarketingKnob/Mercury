@@ -52,7 +52,6 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
     Fragment currentFragment = null;
     FragmentTransaction ft;
     BottomNavigationView bottomNavigationView;
-    private int backPress=0;
     boolean doubleBackToExitPressedOnce = false;
     TinyDB tinyDB;
     ProgressDialog pd;
@@ -121,11 +120,9 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
         ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogoutDialog();
+                logoutDialog();
             }
         });
-
-
 
     }
 
@@ -175,10 +172,8 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
 
         tinyDB                  = new TinyDB(this);
         bottomNavigationView    = (BottomNavigationView) findViewById(R.id.bottomNavigationView_broker);
-//        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
         strUserId = tinyDB.getString("LoginId");
-
     }
 
     @Override
@@ -220,7 +215,7 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
     /**
      * Logout Alert
      */
-    public  void LogoutDialog(){
+    public  void logoutDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
         builder.setTitle(this.getResources().getText(R.string.logout));
         builder.setMessage(this.getResources().getText(R.string.logout_really));
@@ -264,6 +259,5 @@ public class HomeActivity extends AppCompatActivity implements  ApiResponseHelpe
             e.printStackTrace();
         }
     }
-
 
 }

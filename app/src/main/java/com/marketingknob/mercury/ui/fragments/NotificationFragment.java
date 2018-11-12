@@ -86,7 +86,6 @@ public class NotificationFragment extends Fragment implements  ApiResponseHelper
         rvNotification.setLayoutManager(layoutManager1);
         rvNotification.setItemAnimator(new DefaultItemAnimator());
 
-
         new ApiHelper().getNotification(NotificationFragment.this,strUserId);
 
     }

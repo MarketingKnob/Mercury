@@ -2,9 +2,10 @@ package com.marketingknob.mercury.webservices.webresponse;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
-
+/**
+ * Created by Akshya.
+ */
 public class NotificationResponse {
 
     @SerializedName("error")

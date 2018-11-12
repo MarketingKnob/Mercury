@@ -92,8 +92,10 @@
 
     <!--About Developer-->
     <string name="about_developer">About Developer</string>
-
+    <string name="company_detail">Marketing Knob was founded in 2009 and employs a family of highly experienced professionals. Our prime focus is to provide our clients with creative, attractive and efficient solutions for our clients. We brood over the cutting edge technologies and user experience along with the expertise and skills enhance your brand to a whole new level.</string>
     <string name="get_touch">Get In Touch</string>
+    <string name="company_email">hi@marketingknob.com</string>
+    <string name="company_phone">+91 98031-01887</string>
 
 
     <!--Camera Dialog-->

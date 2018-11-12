@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 /**
- * Created by Akshay on 18/10/2018.
+ * Created by Akshay
  */
 
 public interface WebApi {

@@ -1,6 +1,5 @@
 package com.marketingknob.mercury.ui.fragments;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,13 +24,11 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 
     @BindView(R.id.rl_about_developer) RelativeLayout rlAboutDeveloper;
 
-
     Activity activity;
 
     public MoreFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

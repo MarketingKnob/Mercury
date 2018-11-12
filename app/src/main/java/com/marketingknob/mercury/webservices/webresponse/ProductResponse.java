@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * Created by Akshya.
+ */
 public class ProductResponse {
 
     @SerializedName("error")

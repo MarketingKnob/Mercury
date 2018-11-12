@@ -90,7 +90,8 @@
                 android:background="@color/black"
                 app:itemIconTint="@color/white"
                 app:itemTextColor="@color/white"
-                app:menu="@menu/bottom_navigation_menu" />
+                app:menu="@menu/bottom_navigation_menu"
+                app:labelVisibilityMode="labeled"/>
         </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.LinearLayoutCompat>

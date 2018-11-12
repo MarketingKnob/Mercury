@@ -16,6 +16,10 @@ import com.willy.ratingbar.BaseRatingBar;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Akshya on 01/11/2018.
+ */
+
 public class RvDrinkDetails extends RecyclerView.Adapter<RvDrinkDetails.MyViewHolder> {
 
     private Context context;
@@ -28,9 +32,7 @@ public class RvDrinkDetails extends RecyclerView.Adapter<RvDrinkDetails.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayoutCompat llDrink;
         private BaseRatingBar simpleRatingBar;
-
         private AppCompatImageView ivDrink;
         private AppCompatTextView tvDrinkName,tvDrinkPrice;
 
@@ -62,7 +64,6 @@ public class RvDrinkDetails extends RecyclerView.Adapter<RvDrinkDetails.MyViewHo
         holder.simpleRatingBar.setRating(Float.parseFloat(catProductsModelArrayList.get(position).getStrRating()));
         holder.tvDrinkName.setText(catProductsModelArrayList.get(position).getStrName());
         holder.tvDrinkPrice.setText(context.getResources().getString(R.string.price)+": "+catProductsModelArrayList.get(position).getStrPrice());
-
         Picasso.get()
                 .load(catProductsModelArrayList.get(position).getStrProductUrl())
                 .placeholder(R.drawable.bottal)

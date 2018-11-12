@@ -11,6 +11,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Created by Akshya.
+ */
 
 public class ApiHelper {
 
@@ -216,13 +219,10 @@ public class ApiHelper {
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 apiResponseHelper.onSuccess(response, "UpdateNotification");
             }
-
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
                 apiResponseHelper.onFailure(t.getMessage());
             }
         });
     }
-
-
 }

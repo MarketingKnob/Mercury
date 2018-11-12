@@ -238,13 +238,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private boolean validateEmail() {
         strEmail = etEmail.getText().toString().trim();
 
-        if (!CommonUtil.isValidEmail(strEmail)) {
-            DialogUtil.showDialogMsg(SignUpActivity.this, "Email Error",
-                    getResources().getString(R.string.err_msg_email));
-            return false;
-        } else {
-            return true;
+        Log.d(TAG, "validateEmail: "+strEmail.length());
+        if (strEmail.length()>0){
+            if (!CommonUtil.isValidEmail(strEmail)) {
+                DialogUtil.showDialogMsg(SignUpActivity.this, "Email Error",
+                        getResources().getString(R.string.err_msg_email));
+                return false;
+            } else {
+                return true;
+            }
         }
+        return true;
     }
 
     /**
@@ -282,7 +286,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * OTP timer start
      */
-
     private void otpTimerStart(){
         new CountDownTimer(30000, 1000) {
 
@@ -321,7 +324,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 DialogUtil.showDialogMsg(SignUpActivity.this, "Error", getResources().getString(R.string.error_try_again));
             }
         }
-        //For Verify OTP
+
+        /*For Verify OTP*/
        else if(typeApi.equalsIgnoreCase("verifyOTP")) {
             OtpResponse otpResponse = new Gson().fromJson(response.body(), OtpResponse.class);
             if(otpResponse != null) {
@@ -375,9 +379,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        CommonUtil.hideKeyboard(SignUpActivity.this);
-        Animatoo.animateSlideLeft(SignUpActivity.this);
+
+        if (llOtp.getVisibility()==View.VISIBLE){
+
+        }
+        else {
+            super.onBackPressed();
+            CommonUtil.hideKeyboard(SignUpActivity.this);
+            Animatoo.animateSlideLeft(SignUpActivity.this);
+        }
     }
 
     @Override

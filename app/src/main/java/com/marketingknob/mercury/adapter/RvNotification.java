@@ -1,6 +1,5 @@
 package com.marketingknob.mercury.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -16,6 +15,9 @@ import com.marketingknob.mercury.ui.fragments.NotificationFragment;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Akshya on 02/11/2018.
+ */
 public class RvNotification extends RecyclerView.Adapter<RvNotification.MyViewHolder> {
 
     NotificationFragment notificationFragment;
@@ -37,9 +39,9 @@ public class RvNotification extends RecyclerView.Adapter<RvNotification.MyViewHo
 
             btnReadUnread  = view.findViewById(R.id.btn_read_unread);
             tvNotification = view.findViewById(R.id.tv_notification);
+
         }
     }
-
 
     @Override
     public  MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -52,12 +54,10 @@ public class RvNotification extends RecyclerView.Adapter<RvNotification.MyViewHo
         return new  MyViewHolder(layoutView);
     }
 
-
     @Override
     public void onBindViewHolder( MyViewHolder holder, final int position) {
 
         holder.tvNotification.setText(notificationModelArrayList.get(position).getDescription());
-
         if (notificationModelArrayList.get(position).getStatus()){
             holder.btnReadUnread.setBackground(notificationFragment.getResources().getDrawable(R.drawable.red_background));
             holder.btnReadUnread.setText(notificationFragment.getResources().getString(R.string.read));
@@ -71,7 +71,6 @@ public class RvNotification extends RecyclerView.Adapter<RvNotification.MyViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     notificationFragment.readNotification(notificationModelArrayList.get(position).getId());
                 }
             });
@@ -79,9 +78,6 @@ public class RvNotification extends RecyclerView.Adapter<RvNotification.MyViewHo
         else {
             System.out.print("Read");
         }
-
-
-
     }
 
     @Override

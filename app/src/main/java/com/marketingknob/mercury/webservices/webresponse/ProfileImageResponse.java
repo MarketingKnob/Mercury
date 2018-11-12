@@ -2,7 +2,9 @@ package com.marketingknob.mercury.webservices.webresponse;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+/**
+ * Created by Akshya.
+ */
 public class ProfileImageResponse {
 
     @SerializedName("error")

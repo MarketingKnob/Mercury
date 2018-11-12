@@ -70,9 +70,7 @@ public class RvDrinkCategory extends RecyclerView.Adapter<RvDrinkCategory.MyView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 homeFragment.productDetail(drinkCategoryModelArrayList.get(position).getStrId());
-
             }
         });
 

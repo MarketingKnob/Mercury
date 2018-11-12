@@ -102,7 +102,6 @@ public class SplashActivity extends AppCompatActivity {
      *  check for root.
      */
     void checkDeviceRoot(){
-
         if (RootUtil.isDeviceRooted()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
             builder.setMessage(R.string.error_device_rooted);
@@ -184,5 +183,4 @@ public class SplashActivity extends AppCompatActivity {
             startActivityForResult(intent, REQ_CODE_PLAY_STORE);
         }
     }
-
 }

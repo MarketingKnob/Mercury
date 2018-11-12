@@ -26,6 +26,7 @@ import com.gun0912.tedpermission.TedPermission;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.adapter.RvDrinkCategory;
 import com.marketingknob.mercury.model.DrinkCategoryModel;
+import com.marketingknob.mercury.ui.SignUpActivity;
 import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
 import com.marketingknob.mercury.util.MediaUtils;
@@ -90,14 +91,14 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
 
         ButterKnife.bind(this,view);
 
-        activity = this.getActivity();
-        tinyDB   = new TinyDB(activity);
-        llMain.setOnClickListener(this);
-        btnSave.setOnClickListener(this);
-
+        activity    = this.getActivity();
+        tinyDB      = new TinyDB(activity);
         strMobile   = tinyDB.getString("LoginMobile");
         strUserName = tinyDB.getString("LoginUserName");
         strEmail    = tinyDB.getString("LoginEmail");
+
+        llMain.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
 
         Log.d(TAG, "init: "+strMobile+" "+strUserName+" "+strEmail);
 
@@ -111,7 +112,6 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
         ivAddPhotos.setOnClickListener(this);
 
         strUserId =  tinyDB.getString("LoginId");
-
         Log.d(TAG, "init: "+ strUserId);
 
         String ImagePath=tinyDB.getString("ProfileImage");
@@ -155,13 +155,17 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
      */
     private boolean validateEmail() {
         strEmail = etEmail.getText().toString().trim();
-        if (!CommonUtil.isValidEmail(strEmail)) {
-            DialogUtil.showDialogMsg(activity, "Email Error",
-                    getResources().getString(R.string.err_msg_email));
-            return false;
-        } else {
-            return true;
+
+        if (strEmail.length() > 0) {
+            if (!CommonUtil.isValidEmail(strEmail)) {
+                DialogUtil.showDialogMsg(activity, "Email Error",
+                        getResources().getString(R.string.err_msg_email));
+                return false;
+            } else {
+                return true;
+            }
         }
+        return true;
     }
 
     private void submitForm() {
@@ -243,7 +247,12 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
                     etEmail.setText(profileUpdateResponse.getUser().getEmail());
 
                 } else {
-                    SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
+                    strUserName = tinyDB.getString("LoginUserName");
+                    strEmail    = tinyDB.getString("LoginEmail");
+                    etUsername.setText(strUserName);
+                    if (!strEmail.equals(""))
+                        etEmail.setText(strEmail);
+                    SnackBarUtil.showSnackBar(activity, profileUpdateResponse.getMessage(), llMain);
                 }
             } else {
                 SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
@@ -260,13 +269,20 @@ public class AccountFragment extends Fragment  implements MediaUtils.GetImg, Vie
                     tinyDB.putString("ProfileImage",strImagePath);
 
                 } else {
-                    SnackBarUtil.showSnackBar(getActivity(), profileImageResponse.getMessage(), llMain);
+                    String ImagePath=tinyDB.getString("ProfileImage");
+                    if (!ImagePath.equalsIgnoreCase("")){
+                        Picasso.get()
+                                .load(ImagePath)
+                                .placeholder(R.drawable.account)
+                                .error(R.drawable.account)
+                                .into(CivProfileImage);
+                    }
+                    SnackBarUtil.showSnackBar(activity, profileImageResponse.getMessage(), llMain);
                 }
             } else {
-                SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
+                SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
             }
         }
-
     }
 
     @Override
