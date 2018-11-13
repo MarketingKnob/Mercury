@@ -1,5 +1,6 @@
 package com.marketingknob.mercury.ui.fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     ArrayList<CatProductsModel> catProductsModelArrayList;
     private static final String TAG = "HomeFragment";
     String strBannerUrl = "", strImageBaseUrl = "", strDrinkCateUrl = "",strCatProductUrl="";
-
+    Activity activity;
     public String strCategoryId = "";
 
     public HomeFragment() {
@@ -83,6 +84,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     void init(View view) {
 
         context                         = this.getActivity();
+        activity                        = this.getActivity();
         slideList                       = new ArrayList<>();
         drinkCategoryModelArrayList     = new ArrayList<DrinkCategoryModel>();
 
@@ -116,34 +118,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
         new ApiHelper().getBanner(HomeFragment.this);
         new ApiHelper().getDrinkCategory(HomeFragment.this);
 
-        rViewDetails.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
-            {
-                if (dy > 0 ||dy<0 && leftCenterButton.isShown())
-                {
-//                    leftCenterButton.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
-            {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE)
-                {
-//                    leftCenterButton.setVisibility(View.VISIBLE);
-                }
-
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-        });
-
     }
 
     @Override
     public void onClick(View view) {
         if (view == llMain) {
-            CommonUtil.hideKeyboard(getActivity());
+            CommonUtil.hideKeyboard(activity);
         }
     }
 
@@ -174,10 +154,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
                     slider.addSlides(slideList);
 
                 } else {
-                    SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
+                    SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
                 }
             } else {
-                SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
+                SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
             }
         } else if (typeApi.equalsIgnoreCase("DrinkCategory")) {
             DrinkCategoryResponse drinkCategoryResponse = new Gson().fromJson(response.body(), DrinkCategoryResponse.class);
@@ -204,10 +184,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
                     new ApiHelper().getCatProducts(HomeFragment.this, strCategoryId);
 
                 } else {
-                    SnackBarUtil.showSnackBar(getActivity(), drinkCategoryResponse.getMessage(), llMain);
+                    SnackBarUtil.showSnackBar(activity, drinkCategoryResponse.getMessage(), llMain);
                 }
             } else {
-                SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
+                SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
             }
         } else if (typeApi.equalsIgnoreCase("CategoryProducts")) {
 
@@ -236,10 +216,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
                     rViewDetails.setAdapter(rvDrinkDetails);
 
                 }else {
-                SnackBarUtil.showSnackBar(getActivity(), productResponse.getMessage(), llMain);
+                SnackBarUtil.showSnackBar(activity, productResponse.getMessage(), llMain);
             }
         } else {
-            SnackBarUtil.showSnackBar(getActivity(), getResources().getString(R.string.error_try_again), llMain);
+            SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
         }
     }
 }
@@ -266,6 +246,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
         pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.product_details));
         pd.show();
         new ApiHelper().getCatProducts(HomeFragment.this, strCategId);
-
     }
 }
