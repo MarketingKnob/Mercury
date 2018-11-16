@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_create_new:
                 CommonUtil.hideKeyboard(LoginActivity.this);
                 startActivity(new Intent(this, SignUpActivity.class));
-                Animatoo.animateInAndOut(LoginActivity.this);
+                Animatoo.animateSwipeRight(LoginActivity.this);
                 break;
 
             case R.id.ll_main:
@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!validatePhone()) {
             return;
         }
+
         pd = ProgressDialogUtil.getProgressDialogMsg(LoginActivity.this, getResources().getString(R.string.login_online));
         pd.show();
         new ApiHelper().login(strPhone,LoginActivity.this);
@@ -176,7 +177,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     Toast.makeText(this, ""+loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     CommonUtil.hideKeyboard(LoginActivity.this);
-                    Animatoo.animateInAndOut(LoginActivity.this);
+                    Animatoo.animateSwipeRight(LoginActivity.this);
                     startActivity(new Intent(LoginActivity.this, ClubLocationActivity.class));
                     finish();
 
@@ -209,7 +210,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Animatoo.animateSlideLeft(LoginActivity.this);
+
     }
 
 }

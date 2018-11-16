@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context="com.marketingknob.mercury.ui.LoginActivity">
+    tools:context="com.marketingknob.mercury.ui.SignUpActivity">
 
     <ScrollView
         android:layout_width="match_parent"

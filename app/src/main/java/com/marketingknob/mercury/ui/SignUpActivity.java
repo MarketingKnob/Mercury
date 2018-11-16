@@ -1,15 +1,20 @@
 package com.marketingknob.mercury.ui;
 
 import android.Manifest;
+import android.animation.LayoutTransition;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
+import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
 
@@ -39,6 +44,7 @@ import io.ghyeok.stickyswitch.widget.StickySwitch;
 import retrofit2.Response;
 
 import android.os.CountDownTimer;
+import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
@@ -113,14 +119,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v) {
         if (v== btnSignUp){
             submitForm();
+
         }else if (v==tvlogin){
             finish();
             CommonUtil.hideKeyboard(SignUpActivity.this);
-            Animatoo.animateInAndOut(SignUpActivity.this);
+            Animatoo.animateSwipeLeft(SignUpActivity.this);
         }else if (v==llMain){
             CommonUtil.hideKeyboard(SignUpActivity.this);
         }else if (v==llOtp){
@@ -386,7 +394,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         else {
             super.onBackPressed();
             CommonUtil.hideKeyboard(SignUpActivity.this);
-            Animatoo.animateSlideLeft(SignUpActivity.this);
+            Animatoo.animateSwipeLeft(SignUpActivity.this);
         }
     }
 

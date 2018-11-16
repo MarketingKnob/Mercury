@@ -54,4 +54,5 @@
         android:textColor="@color/white"
         android:textSize="@dimen/font_normal" />
 
+
 </android.support.v7.widget.LinearLayoutCompat>
