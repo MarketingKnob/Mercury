@@ -3,6 +3,8 @@ package com.marketingknob.mercury.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
+
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.marketingknob.mercury.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,5 +24,12 @@ public class AboutDeveloperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_developer);
 
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateFade(AboutDeveloperActivity.this);
+
     }
 }

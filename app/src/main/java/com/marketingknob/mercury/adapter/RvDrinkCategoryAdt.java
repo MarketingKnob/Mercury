@@ -3,15 +3,11 @@ package com.marketingknob.mercury.adapter;
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.model.DrinkCategoryModel;
 import com.marketingknob.mercury.ui.fragments.HomeFragment;
@@ -22,13 +18,13 @@ import java.util.ArrayList;
 /**
  * Created by Akshya on 23/10/2018.
  */
-public class RvDrinkCategory extends RecyclerView.Adapter<RvDrinkCategory.MyViewHolder> {
+public class RvDrinkCategoryAdt extends RecyclerView.Adapter<RvDrinkCategoryAdt.MyViewHolder> {
 
     private Context context;
     private ArrayList<DrinkCategoryModel> drinkCategoryModelArrayList = new ArrayList<>();
     private HomeFragment homeFragment;
 
-    public RvDrinkCategory(Context context, ArrayList<DrinkCategoryModel> drinkCategoryModelArrayList,HomeFragment homeFragment) {
+    public RvDrinkCategoryAdt(Context context, ArrayList<DrinkCategoryModel> drinkCategoryModelArrayList, HomeFragment homeFragment) {
         this.context = context;
         this.drinkCategoryModelArrayList = drinkCategoryModelArrayList;
         this.homeFragment=homeFragment;

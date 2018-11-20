@@ -14,17 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.marketingknob.mercury.R;
-import com.marketingknob.mercury.adapter.RvDrinkCategory;
-import com.marketingknob.mercury.adapter.RvDrinkDetails;
+import com.marketingknob.mercury.adapter.RvDrinkCategoryAdt;
+import com.marketingknob.mercury.adapter.RvDrinkDetailsAdt;
 import com.marketingknob.mercury.model.CatProductsModel;
 import com.marketingknob.mercury.model.DrinkCategoryModel;
 import com.marketingknob.mercury.util.CommonUtil;
 import com.marketingknob.mercury.util.DialogUtil;
 import com.marketingknob.mercury.util.FloatingButton;
-import com.marketingknob.mercury.util.ProgressDialogUtil;
 import com.marketingknob.mercury.util.SnackBarUtil;
 import com.marketingknob.mercury.webservices.ApiHelper;
 import com.marketingknob.mercury.webservices.WebConstants;
@@ -54,8 +54,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     Context context;
     LinearLayoutCompat llMain;
 
-    RvDrinkCategory rvDrinkCategory;
-    RvDrinkDetails rvDrinkDetails;
+    RvDrinkCategoryAdt rvDrinkCategoryAdt;
+    RvDrinkDetailsAdt drinkDetailsAdt;
     ProgressDialog pd;
 
     List<Slide> slideList;
@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     String strBannerUrl = "", strImageBaseUrl = "", strDrinkCateUrl = "",strCatProductUrl="";
     Activity activity;
     public String strCategoryId = "";
+    ShimmerRecyclerView shimmerCategory,shimmerProdDeatil;
 
     public HomeFragment() {
 
@@ -93,6 +94,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
         rViewDrink                      = view.findViewById(R.id.rv_drink_catg);
         rViewDetails                    = view.findViewById(R.id.rv_drink_detail);
         llMain                          = view.findViewById(R.id.ll_main);
+        shimmerCategory                 = view.findViewById(R.id.shimmer_category);
+        shimmerProdDeatil               = view.findViewById(R.id.shimmer_prod_deatil);
 
         strImageBaseUrl                 = WebConstants.IMAGES_BASE_URL;
 
@@ -112,8 +115,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
 
         FloatingButton.floatingWorking(context, getActivity());
 
-        pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.fetch_details));
-        pd.show();
+//        pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.fetch_details));
+//        pd.show();
+        shimmerCategory.showShimmerAdapter();
+        shimmerProdDeatil.showShimmerAdapter();
 
         new ApiHelper().getBanner(HomeFragment.this);
         new ApiHelper().getDrinkCategory(HomeFragment.this);
@@ -163,6 +168,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
             DrinkCategoryResponse drinkCategoryResponse = new Gson().fromJson(response.body(), DrinkCategoryResponse.class);
             if (drinkCategoryResponse != null) {
                 if (!drinkCategoryResponse.getError()) {
+
+                    shimmerCategory.hideShimmerAdapter();
+
                     strCategoryId = drinkCategoryResponse.getCategory().getResult().get(0).getId();
                     Log.d(TAG, "productDetail:Before " + strCategoryId);
                     for (int i = 0; i < drinkCategoryResponse.getCategory().getResult().size(); i++) {
@@ -178,8 +186,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
                         drinkCategoryModelArrayList.add(drinkCategoryModel);
                     }
 
-                    rvDrinkCategory = new RvDrinkCategory(context, drinkCategoryModelArrayList, HomeFragment.this);
-                    rViewDrink.setAdapter(rvDrinkCategory);
+                    rvDrinkCategoryAdt = new RvDrinkCategoryAdt(context, drinkCategoryModelArrayList, HomeFragment.this);
+                    rViewDrink.setAdapter(rvDrinkCategoryAdt);
 
                     new ApiHelper().getCatProducts(HomeFragment.this, strCategoryId);
 
@@ -195,6 +203,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
             if (productResponse != null) {
                 if (!productResponse.getError()) {
 
+                    shimmerProdDeatil.hideShimmerAdapter();
+                    rViewDetails.setVisibility(View.VISIBLE);
                     catProductsModelArrayList       = new ArrayList<CatProductsModel>();
 
                     for (int i = 0; i <productResponse.getProduct().getResult().size() ; i++) {
@@ -212,8 +222,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
                         catProductsModelArrayList.add(catProductsModel);
                     }
 
-                    rvDrinkDetails = new RvDrinkDetails(context,catProductsModelArrayList);
-                    rViewDetails.setAdapter(rvDrinkDetails);
+                    drinkDetailsAdt = new RvDrinkDetailsAdt(context,catProductsModelArrayList);
+                    rViewDetails.setAdapter(drinkDetailsAdt);
 
                 }else {
                 SnackBarUtil.showSnackBar(activity, productResponse.getMessage(), llMain);
@@ -243,8 +253,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
 
     public void productDetail(String strCategId) {
         Log.d(TAG, "productDetail:After " + strCategId);
-        pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.product_details));
-        pd.show();
+//        pd = ProgressDialogUtil.getProgressDialogMsg(context, getResources().getString(R.string.product_details));
+//        pd.show();
+        rViewDetails.setVisibility(View.GONE);
+        catProductsModelArrayList       = new ArrayList<CatProductsModel>();
+        shimmerProdDeatil.showShimmerAdapter();
         new ApiHelper().getCatProducts(HomeFragment.this, strCategId);
     }
 }

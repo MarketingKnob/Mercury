@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.model.NotificationModel;
@@ -18,12 +17,12 @@ import java.util.ArrayList;
 /**
  * Created by Akshya on 02/11/2018.
  */
-public class RvNotification extends RecyclerView.Adapter<RvNotification.MyViewHolder> {
+public class RvNotificationAdpt extends RecyclerView.Adapter<RvNotificationAdpt.MyViewHolder> {
 
     NotificationFragment notificationFragment;
     ArrayList<NotificationModel> notificationModelArrayList;
 
-    public RvNotification(NotificationFragment notificationFragment, ArrayList<NotificationModel> notificationModelArrayList) {
+    public RvNotificationAdpt(NotificationFragment notificationFragment, ArrayList<NotificationModel> notificationModelArrayList) {
         this.notificationFragment = notificationFragment;
         this.notificationModelArrayList = notificationModelArrayList;
     }

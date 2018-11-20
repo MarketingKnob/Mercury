@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_main"
@@ -26,17 +25,25 @@
 
     </android.support.v7.widget.LinearLayoutCompat>
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/white">
+
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/shimmer_category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:shimmer_demo_child_count="10"
+            app:shimmer_demo_layout="@layout/product_cat_loader"
+            app:shimmer_demo_layout_manager_type="linear_horizontal" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_drink_catg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -83,10 +90,25 @@
         android:layout_height="1dip"
         android:background="@color/light_red" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_drink_detail"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/pad_15dp" />
+        android:layout_height="wrap_content">
+
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/shimmer_prod_deatil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:shimmer_demo_child_count="5"
+            app:shimmer_demo_layout="@layout/product_details_loader"
+            app:shimmer_demo_layout_manager_type="linear_vertical" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_drink_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_15dp" />
+    </RelativeLayout>
+
 
 </android.support.v7.widget.LinearLayoutCompat>

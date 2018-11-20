@@ -190,25 +190,17 @@ public class SplashActivity extends AppCompatActivity {
 
 
     /** calculates the distance between two locations in MILES  For better use please go to Google Matrix API */
-    private double distance(double lat1, double lng1, double lat2, double lng2) {
+    public static float distance(Double lat1, Double lng1, Double lat2, Double lng2) {
+        double earthRadius = 6371000; //meters
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        float dist = (float) (earthRadius * c);
 
-//      double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output
-        double earthRadius = 6371; // in miles, change to 6371 for kilometer output
-
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-
-        double sindLat = Math.sin(dLat / 2);
-        double sindLng = Math.sin(dLng / 2);
-
-        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
-                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
-
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-        double dist = earthRadius * c;
         Log.d(TAG, "distance: "+dist);
-        return dist; // output distance, in MILES
-
+        return dist;
     }
 }

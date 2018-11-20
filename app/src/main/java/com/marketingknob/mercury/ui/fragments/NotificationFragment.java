@@ -3,37 +3,30 @@ package com.marketingknob.mercury.ui.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.RelativeLayout;
 
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.marketingknob.mercury.R;
-import com.marketingknob.mercury.adapter.RvDrinkDetails;
-import com.marketingknob.mercury.adapter.RvNotification;
-import com.marketingknob.mercury.model.DrinkCategoryModel;
+import com.marketingknob.mercury.adapter.RvNotificationAdpt;
 import com.marketingknob.mercury.model.NotificationModel;
 import com.marketingknob.mercury.util.DialogUtil;
-import com.marketingknob.mercury.util.FloatingButton;
-import com.marketingknob.mercury.util.MediaUtils;
 import com.marketingknob.mercury.util.ProgressDialogUtil;
 import com.marketingknob.mercury.util.SnackBarUtil;
 import com.marketingknob.mercury.util.TinyDB;
 import com.marketingknob.mercury.webservices.ApiHelper;
-import com.marketingknob.mercury.webservices.WebConstants;
 import com.marketingknob.mercury.webservices.interfaces.ApiResponseHelper;
 import com.marketingknob.mercury.webservices.webresponse.NotificationResponse;
-import com.marketingknob.mercury.webservices.webresponse.ProfileUpdateResponse;
 import com.marketingknob.mercury.webservices.webresponse.UpdateNotification;
 
 import java.util.ArrayList;
@@ -48,13 +41,15 @@ public class NotificationFragment extends Fragment implements  ApiResponseHelper
 
     RecyclerView rvNotification;
     Activity activity;
-    RvNotification rvNotificationAdapter;
+    RvNotificationAdpt rvNotificationAdapter;
     ProgressDialog pd;
-    LinearLayoutCompat llMain;
+    RelativeLayout rlMain;
     ArrayList<NotificationModel> notificationModelArrayList;
     String strUserId="";
     TinyDB tinyDB;
     private static final String TAG = "NotificationFragment";
+    ShimmerRecyclerView shimmerNotification;
+
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -75,7 +70,8 @@ public class NotificationFragment extends Fragment implements  ApiResponseHelper
 
         activity                        = this.getActivity();
         rvNotification                  = view.findViewById(R.id.rv_notification);
-        llMain                          = view.findViewById(R.id.ll_main);
+        rlMain                          = view.findViewById(R.id.rl_main);
+        shimmerNotification = view.findViewById(R.id.shimmer_recycler_view);
 
         tinyDB                          = new TinyDB(activity);
         strUserId                       = tinyDB.getString("LoginId");
@@ -86,6 +82,7 @@ public class NotificationFragment extends Fragment implements  ApiResponseHelper
         rvNotification.setLayoutManager(layoutManager1);
         rvNotification.setItemAnimator(new DefaultItemAnimator());
 
+        shimmerNotification.showShimmerAdapter();
         new ApiHelper().getNotification(NotificationFragment.this,strUserId);
 
     }
@@ -99,6 +96,8 @@ public class NotificationFragment extends Fragment implements  ApiResponseHelper
             if (notificationResponse != null) {
                 if (!notificationResponse.getError()) {
 
+                    shimmerNotification.hideShimmerAdapter();
+
                     for (int i = 0; i < notificationResponse.getNotification().getResult().size(); i++) {
                         NotificationModel notificationModel = new NotificationModel();
                         notificationModel.setId(notificationResponse.getNotification().getResult().get(i).getId());
@@ -108,14 +107,14 @@ public class NotificationFragment extends Fragment implements  ApiResponseHelper
                         notificationModelArrayList.add(notificationModel);
 
                     }
-                    rvNotificationAdapter = new RvNotification(NotificationFragment.this,notificationModelArrayList);
+                    rvNotificationAdapter = new RvNotificationAdpt(NotificationFragment.this,notificationModelArrayList);
                     rvNotification.setAdapter(rvNotificationAdapter);
 
                 } else {
-                    SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
+                    SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), rlMain);
                 }
             } else {
-                SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
+                SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), rlMain);
             }
         }
        else if (typeApi.equalsIgnoreCase("UpdateNotification")) {
@@ -125,10 +124,10 @@ public class NotificationFragment extends Fragment implements  ApiResponseHelper
                     new ApiHelper().getNotification(NotificationFragment.this,strUserId);
 
                 } else {
-                    SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
+                    SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), rlMain);
                 }
             } else {
-                SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), llMain);
+                SnackBarUtil.showSnackBar(activity, getResources().getString(R.string.error_try_again), rlMain);
             }
         }
     }

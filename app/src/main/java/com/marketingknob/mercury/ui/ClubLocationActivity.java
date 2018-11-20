@@ -121,7 +121,6 @@ public class ClubLocationActivity extends FragmentActivity implements OnMapReady
                 .check();
     }
 
-
     @Override
     public void onClick(final View view) {
 
@@ -130,23 +129,23 @@ public class ClubLocationActivity extends FragmentActivity implements OnMapReady
         }
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         builder = new LatLngBounds.Builder();
 
         for (int i = 0; i < location.size(); i++) {
-            Latitude = Double.parseDouble(location.get(i).get("Latitude").toString());
-            Longitude = Double.parseDouble(location.get(i).get("Longitude").toString());
-            String name = location.get(i).get("LocationName").toString();
-            MarkerOptions marker = new MarkerOptions().position(new LatLng(Latitude, Longitude)).title(name);
+            Latitude                = Double.parseDouble(location.get(i).get("Latitude").toString());
+            Longitude               = Double.parseDouble(location.get(i).get("Longitude").toString());
+            String name             = location.get(i).get("LocationName").toString();
+            MarkerOptions marker    = new MarkerOptions().position(new LatLng(Latitude, Longitude)).title(name);
 //            marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+
             marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.bar));
             googleMap.addMarker(marker);
             builder.include(marker.getPosition());
-        }
 
+        }
 
         //Add Current Location Marker on the Map
         MarkerOptions mp1 = new MarkerOptions();
@@ -182,7 +181,6 @@ public class ClubLocationActivity extends FragmentActivity implements OnMapReady
         mMap.animateCamera(cameraUpdate);
     }
 
-
     //   Intent To Home Screen
     void nextScreenIntent(){
         Handler handler = new Handler();
@@ -190,9 +188,10 @@ public class ClubLocationActivity extends FragmentActivity implements OnMapReady
             @Override
             public void run() {
                 startActivity(new Intent(ClubLocationActivity.this, HomeActivity.class));
+                Animatoo.animateZoom(ClubLocationActivity.this);
                 finish();
 //                Animatoo.animateDiagonal(ClubLocationActivity.this);
-                Animatoo.animateZoom(ClubLocationActivity.this);
+
 
             }
         }, MAP_TIME_OUT);

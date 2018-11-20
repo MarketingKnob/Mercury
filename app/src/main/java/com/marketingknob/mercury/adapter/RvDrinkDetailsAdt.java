@@ -3,7 +3,6 @@ package com.marketingknob.mercury.adapter;
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +19,12 @@ import java.util.ArrayList;
  * Created by Akshya on 01/11/2018.
  */
 
-public class RvDrinkDetails extends RecyclerView.Adapter<RvDrinkDetails.MyViewHolder> {
+public class RvDrinkDetailsAdt extends RecyclerView.Adapter<RvDrinkDetailsAdt.MyViewHolder> {
 
     private Context context;
     ArrayList<CatProductsModel> catProductsModelArrayList= new ArrayList<CatProductsModel>();
 
-    public RvDrinkDetails(Context context, ArrayList<CatProductsModel> catProductsModelArrayList) {
+    public RvDrinkDetailsAdt(Context context, ArrayList<CatProductsModel> catProductsModelArrayList) {
         this.context = context;
         this.catProductsModelArrayList = catProductsModelArrayList;
     }

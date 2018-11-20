@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
 
     void init() {
-        tinyDB = new TinyDB(this);
+        tinyDB  = new TinyDB(this);
         context = LoginActivity.this;
         ButterKnife.bind(this);
         btnSignIn.setOnClickListener(this);
@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /*Submit Login Form*/
     private void submitForm() {
 
         CommonUtil.hideKeyboard(LoginActivity.this);
@@ -117,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         new ApiHelper().login(strPhone,LoginActivity.this);
     }
 
-
+    /*Validate Phone*/
     private boolean validatePhone() {
         strPhone = etPhone.getText().toString().trim();
 
@@ -154,6 +155,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
+
 
     @Override
     public void onSuccess(Response<JsonElement> response, String typeApi) {
@@ -212,5 +214,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onBackPressed();
 
     }
-
 }

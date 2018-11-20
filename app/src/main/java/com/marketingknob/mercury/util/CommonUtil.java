@@ -31,6 +31,7 @@ public final class CommonUtil {
     /**
      * Prevent instantiation
      */
+
     private CommonUtil() {
     }
 
@@ -152,14 +153,11 @@ public final class CommonUtil {
 //        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
 //        For optional Email Validation
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-
-
     }
 
     /**
      * For Phone Validation
      */
-
     public static boolean isValidnumber(String phone) {
         boolean check=false;
         if(!Pattern.matches("[a-zA-Z]+", phone)) {
@@ -186,5 +184,4 @@ public final class CommonUtil {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
 }
