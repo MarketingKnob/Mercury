@@ -49,6 +49,7 @@
     <string name="otp"> Enter OTP</string>
     <string name="verfication_code"> Verification Code</string>
     <string name="confim">Confirm</string>
+    <string name="dob">D.O.B</string>
     <string name="resend">Resend OTP</string>
     <string name="error_wrong_otp">You have entered a wrong OTP.</string>
     <string name="blank_otp">OTP can not be blank.</string>

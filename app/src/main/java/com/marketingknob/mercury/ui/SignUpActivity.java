@@ -4,6 +4,7 @@ import android.Manifest;
 import android.animation.LayoutTransition;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
@@ -19,11 +20,13 @@ import android.util.Log;
 import android.view.View;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.goodiebag.pinview.Pinview;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.marketingknob.mercury.PickerPopWin.DatePickerPopWin;
 import com.marketingknob.mercury.R;
 import com.marketingknob.mercury.otp.SmsListener;
 import com.marketingknob.mercury.otp.SmsReceiver;
@@ -49,6 +52,7 @@ import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -64,6 +68,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.tv_login)            AppCompatTextView tvlogin;
     @BindView(R.id.tv_number)           AppCompatTextView tvNumber;
     @BindView(R.id.tv_timer)            AppCompatTextView tvTimer;
+    @BindView(R.id.tv_dob)              AppCompatTextView tvDob;
 
     @BindView(R.id.input_layout_phone)  TextInputLayout inputLayoutPhone;
     @BindView(R.id.input_layout_name)   TextInputLayout inputLayoutName;
@@ -88,7 +93,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
 
         init();
 
@@ -137,12 +141,38 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             strOtp=pinview.getValue();
             Log.d(TAG, "onClick:PinGet "+strOtp);
             otpValidation();
-        }
-        else if (v==btnResendOtp){
+        } else if (v==btnResendOtp){
             CommonUtil.hideKeyboard(SignUpActivity.this);
             llMain.setVisibility(View.VISIBLE);
             llOtp.setVisibility(View.GONE);
+        }else if (v==tvDob){
+            datePicker();
         }
+    }
+
+    /*Date Picker for Date of Birth Like as IOs*/
+    void datePicker() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR,1);
+        int CurrentYear = calendar.get(Calendar.YEAR);
+        DatePickerPopWin pickerPopWin = new DatePickerPopWin.Builder(SignUpActivity.this, new DatePickerPopWin.OnDatePickedListener() {
+            @Override
+            public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
+                Log.d(TAG, "onDatePickCompleted: "+dateDesc+" "+year);
+                tvDob.setText(""+day+"/"+month+"/"+year);
+            }
+        }).textConfirm("CONFIRM") //text of confirm button
+                .textCancel("CANCEL") //text of cancel button
+                .btnTextSize(16) // button text size
+                .viewTextSize(25) // pick view text size
+                .colorCancel(Color.parseColor("#999999")) //color of cancel button
+                .colorConfirm(Color.parseColor("#009900"))//color of confirm button
+                .minYear(1960) //min year in loop
+                .maxYear(CurrentYear) // max year in loop
+//                .dateChose("2013-11-11") // date chose when init popwindow
+                .build();
+        pickerPopWin.showPopWin(SignUpActivity.this);
     }
 
     /**
@@ -164,6 +194,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         llOtp.setOnClickListener(this);
         btnOtp.setOnClickListener(this);
         btnResendOtp.setOnClickListener(this);
+        tvDob.setOnClickListener(this);
 //        pinview.setValue("5846");
 
         //For Focus of Cursor into Edit Text
